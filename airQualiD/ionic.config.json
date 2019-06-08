@@ -1,6 +1,8 @@
 {
   "name": "airQualiD",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "bb9648b2"
 }

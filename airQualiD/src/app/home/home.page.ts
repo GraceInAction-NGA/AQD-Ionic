@@ -6,9 +6,13 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  myChart: Chart;
-  @ViewChild('chartContainer') chartcontainer: ElementRef;
-  @ViewChild('chartcanvas') chartcanvas: ElementRef;
+  myChart: any;
+
+  @ViewChild('chartContainer')
+  chartcontainer: ElementRef;
+
+  @ViewChild('chartcanvas')
+  chartcanvas: ElementRef;
 
   ngAfterViewInit() {
     this.createChart();
