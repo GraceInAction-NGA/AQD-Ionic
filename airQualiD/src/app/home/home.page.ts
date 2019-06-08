@@ -10,10 +10,11 @@ export class HomePage {
   @ViewChild('chartContainer') chartcontainer: ElementRef;
   @ViewChild('chartcanvas') chartcanvas: ElementRef;
 
-ngAfterViewInit() {
-
+  ngAfterViewInit() {
     this.createChart();
-    createChart(); {
+  }
+
+  createChart() {
     this.myChart = new Chart(this.chartcanvas.nativeElement, {
       type: 'horizontalBar',
       data: {
@@ -53,6 +54,5 @@ ngAfterViewInit() {
     });
   }
 
-  }
 
 }
