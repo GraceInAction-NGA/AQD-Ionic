@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: './pages/about/about.module#AboutPageModule'
-  }
+  },
+  { path: 'health', loadChildren: './pages/health/health.module#HealthPageModule' }
 ];
 
 @NgModule({
