@@ -74,4 +74,24 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+
+}
+
+.gradient-bg {
+  --background: #9bc69f; /* Old browsers */
+  --background: -moz-linear-gradient(top,  #9bc69f 0%, #4A99A4 60%, #89D6E0 100%); /* FF3.6-15 */
+  --background: -webkit-linear-gradient(top,  #9bc69f 0%, #4A99A4 60%, #89D6E0 100%); /* Chrome10-25,Safari5.1-6 */
+  --background: linear-gradient(to bottom,  #9bc69f 0%, #4A99A4 60%, #89D6E0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed8b2', endColorstr='#8eb892',GradientType=0 ); /* IE6-9 */
+;
+}
+.center-text {
+text-align: center;
+}
+.white-card {
+  --background: white;
+}
+ion-toolbar {
+  --background: #F6DB7A;
 }

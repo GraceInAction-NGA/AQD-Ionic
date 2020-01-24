@@ -4,60 +4,28 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      <img src="/assets/img/airQualiD.png">
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <img src="/assets/img/airQualiD-t.gif" loop="false">
-
-  <svg width="376" height="355" viewBox="0 0 376 355" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <text x="50%" y="55%" fill="#505050" text-anchor="middle" class="display-3" id="aqi-number">Good</text>
-    <text x="50%" y="75%" fill="#505050" text-anchor="middle" class="display-3" id="aqi-text">30</text>
-    <g style="mix-blend-mode:multiply" opacity="0.5" filter="url(#filter0_d)">
-      <path d="M353.513 166.16C359.171 251.3 289.6 325.248 198.123 331.327C95.2549 338.162 28.6683 284.85 22.2441 188.173C16.5864 103.033 76.5104 29.7264 177.635 23.0066C269.112 16.9279 347.089 69.4835 353.513 166.16Z" fill="url(#paint0_linear)"/>
-    </g>
-    <path d="M273.681 308.81L265.92 295.854C328.997 255.699 335.611 188.329 331.033 159.663C325.304 128.742 297.537 62.7903 232.303 46.3465C167.069 29.9027 115.404 56.7785 97.7256 72.2718C81.468 84.0078 48.0952 121.722 44.665 178.692C41.2348 235.661 83.8226 280.316 105.545 295.522L94.3907 311.976" stroke="#505050" stroke-width="5" stroke-linejoin="round"/>
-    <defs>
-      <filter id="filter0_d" x="0" y="0" width="375.758" height="354.333" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-        <feOffset/>
-        <feGaussianBlur stdDeviation="6"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0.0705882 0 0 0 0 0.0705882 0 0 0 0 0.0705882 0 0 0 0.3 0"/>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-      </filter>
-      <linearGradient id="paint0_linear" x1="58.1346" y1="69.439" x2="338.158" y2="254.023" gradientUnits="userSpaceOnUse">
-        <stop stop-color="white"/>
-        <stop offset="1" stop-color="#C4C4C4"/>
-      </linearGradient>
-    </defs>
-  </svg>
-  <p class="lead">Air quality is considered good enough, and air pollution poses little or no risk</p>
+<ion-content padding class="gradient-bg home">
+  <!--<img src="/assets/img/airQualiD-t.gif" loop="false">-->
+  <img src="../assets/img/aqi.png" alt="">
+  <p class="center-text" id="statement">Air quality is considered good enough, and air pollution poses little or no risk</p>
 
   <ion-icon name="ios-arrow-down" expand="full"></ion-icon>
 
-  <ion-card>
-    <ion-card-header>
-      Good
-    </ion-card-header>
-    <ion-card-content>
-      Tuesday<br/>October 9th
-    </ion-card-content>
-  </ion-card>
 
-  <ion-card>
+
+  <ion-card padding class="white-card">
       <div class="card-title">Air Quality Index</div>
       <div #chartContainer class='chart-container'>
         <canvas  #chartcanvas id="line-chart"></canvas>
     </div>
-      <img src="/assets/img/chart1.png"/>
-      <div class="card-subtitle">41 Listings</div>
   </ion-card>
 
-  <ion-card>
+  <ion-card padding class="white-card">
       <div class="card-title">Pollutant Concentrations</div>
       <img src="/assets/img/chart2.png"/>
       <div class="card-subtitle">64 Listings</div>
