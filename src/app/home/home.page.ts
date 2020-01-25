@@ -62,10 +62,10 @@ import {Chart} from "chart.js";
 export class HomePage {
   myChart: any;
 
-  @ViewChild('chartContainer')
+  @ViewChild('chartContainer', {static: false})
   chartcontainer: ElementRef;
 
-  @ViewChild('chartcanvas')
+  @ViewChild('chartcanvas', {static: false})
   chartcanvas: ElementRef;
 
   ngAfterViewInit() {
