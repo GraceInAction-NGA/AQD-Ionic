@@ -28,7 +28,7 @@ export class HomePage {
 
   ngAfterViewInit() {
     this.createChart();
-    this.renderGauge(25);
+    this.renderGauge(125);
   }
 
   createChart() {
