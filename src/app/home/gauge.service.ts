@@ -27,7 +27,7 @@ export class GaugeService {
         this.imgSrc = imgSrc;
     }
 
-    renderGauge(aqi) {
+    renderGauge(aqi: any, rating: any) {
       const ctx = this.getCanvasContext(this.canvas);
       const img = new Image();
       img.src = this.imgSrc;
@@ -35,6 +35,7 @@ export class GaugeService {
       const a = function() {
         ctx.drawImage(img, 0, 0, this.WIDTH, this.HEIGHT);
         this.setMarker(ctx, aqi);
+        this.setText(ctx, aqi, rating);
      };
   
       img.onload = a.bind(this);
@@ -52,6 +53,7 @@ export class GaugeService {
     };
 
     private setMarker(ctx, aqi) {
+        ctx.save();
         ctx.translate(this.WIDTH * 0.5, this.HEIGHT * 0.5);
         ctx.fillStyle = "#555";
 
@@ -59,7 +61,19 @@ export class GaugeService {
         this.rotateMarker(ctx, degrees);
 
         ctx.fillRect(0, 0, this.WIDTH/12.2, this.HEIGHT/60);
+        ctx.restore();
     };
+
+    private setText(ctx, aqi, rating) {
+        ctx.save();
+        ctx.font = "50px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(String(aqi), this.WIDTH*0.5, this.HEIGHT*0.5);
+        ctx.font = "30px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(rating, this.WIDTH*0.5, (this.HEIGHT*0.5)+60);
+        ctx.restore();
+    }
 
     private rotateMarker(ctx, degrees) {
         for (let i = 0; i < degrees-1; i++) {

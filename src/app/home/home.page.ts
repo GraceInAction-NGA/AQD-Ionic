@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
+import axios from "axios";
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,8 @@ import {GaugeService} from "./gauge.service";
 
 export class HomePage {
   myChart: any;
-  // gaugeService: any;
 
-  constructor(public GaugeService: GaugeService) {
-    // this.gaugeService = GaugeService;
-  };
+  constructor(public GaugeService: GaugeService) {};
 
   @ViewChild('chartContainer', {static: false})
   chartcontainer: ElementRef;
@@ -28,7 +26,10 @@ export class HomePage {
 
   ngAfterViewInit() {
     this.createChart();
-    this.renderGauge(125);
+
+    axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
+      this.renderGauge(data.aqi.realTime, data.category.realTime);
+    });
   }
 
   createChart() {
@@ -61,11 +62,11 @@ export class HomePage {
     });
   }
 
-  renderGauge(aqi) {
+  renderGauge(aqi, rating) {
     const gauge = new GaugeService();
     gauge.setCanvas(this.gaugeCanvas.nativeElement);
     gauge.setImgSrc("../assets/img/aqi.png");
-    gauge.renderGauge(aqi);
+    gauge.renderGauge(aqi, rating);
   }
 }
 
