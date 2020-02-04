@@ -53,7 +53,6 @@ let getYesterday = function(month, day, year) {
 
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {Chart} from "chart.js";
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -75,32 +74,54 @@ export class HomePage {
 
   createChart() {
 
-  let bagOfDates = ['Today'];
-  let date = today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear();
+    let bagOfDates = ['Today'];
+    let date = today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear();
 
-  for (var i = 8; i >= 0; i--) {
-    date = getYesterday(date.split('-')[0],date.split('-')[1],date.split('-')[2])  
-    bagOfDates.push(printDate(date))
-  }
-
-this.myChart = new Chart(this.chartcanvas.nativeElement, {
-  type: 'line',
-  data: {
-    labels: bagOfDates.reverse(),
-    datasets: [{  
-        data: [6,3,2,2,7,26,82,172,312,433],
-        label: "PM 2.5",
-        borderColor: "#c45850",
-        fill: false
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: ''
+    for (var i = 8; i >= 0; i--) {
+      date = getYesterday(date.split('-')[0],date.split('-')[1],date.split('-')[2])  
+      bagOfDates.push(printDate(date))
     }
+    let dailyData = [6,3,2,2,40,86,105,172,312];
+    let pointColors = [];
+
+    for(i=0;i < dailyData.length; i++){
+      if(dailyData[i] <= 50){
+        pointColors[i] = "#9bc69f"
+      }else if(dailyData[i] <= 100){
+        pointColors[i] = "#f6db7a"
+      }else if(dailyData[i] <= 150){
+        pointColors[i] = "#fa845d"
+      }else if(dailyData[i] <= 200){
+        pointColors[i] = "#dc6e4c"
+      }else{
+        pointColors[i] = "#ba7fc3"
+      }
+    }
+
+  
+
+
+    this.myChart = new Chart(this.chartcanvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: bagOfDates.reverse(),
+        datasets: [{  
+            data: dailyData,
+            label: "PM 2.5",
+            borderColor: "#555",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius: 9,
+            pointBackgroundColor: pointColors
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: ''
+        }
+      }
+      });
+      }
   }
-  });
-  }
-}
