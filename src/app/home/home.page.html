@@ -10,8 +10,10 @@
 </ion-header>
 
 <ion-content padding class="gradient-bg home">
-  <!--<img src="/assets/img/airQualiD-t.gif" loop="false">-->
-  <img src="../assets/img/aqi.png" alt="">
+  <div class="center">
+      <canvas #gaugeCanvas id="canvas"></canvas>
+  </div>
+
   <p class="center-text" id="statement">Air quality is considered good enough, and air pollution poses little or no risk</p>
 
   <ion-icon name="ios-arrow-down" expand="full"></ion-icon>

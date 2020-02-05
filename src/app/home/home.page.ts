@@ -1,65 +1,19 @@
-// push  github
-
-
-let today = new Date();
-console.log(today)
-// check date
-let getYesterday = function(month, day, year) {
-  month = Number(month);
-  day = Number(day);
-  year = Number(year);
-
-  if (day === 1){
-    if(month === 0){
-      month = 11
-      day = 31
-      year--
-     } else {
-       month--
-       
-      if(month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9){
-        day = 31
-      }
-     
-       if(month === 3 || month === 5 || month === 8 || month === 10){
-         day = 30
-       }
-     }
-     if(month === 1){
-       
-      if(year % 4 === 0){
-        day = 29
-      } else {
-        day = 28
-      }
-    }
-   
-  } else{
-    day--
-  }
- 
-  return month + "-" + day + "-" + year;
-}
-
-  // print date
-  let printDate = (sysDateString) => {
-    let parsedSysDate = sysDateString.split('-');
-    let sysMonth = parsedSysDate[0];
-    let sysDay = parsedSysDate[1];
-    let sysYear = parsedSysDate[2];
-
-    return `${Number(sysMonth)+1}-${sysDay}-${sysYear}`;
-  }
-
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import {Chart} from "chart.js";
+import {GaugeService} from "./gauge.service";
+import axios from "axios";
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  providers: [GaugeService],
 })
+
 export class HomePage {
   myChart: any;
+
+  constructor(public GaugeService: GaugeService) {};
 
   @ViewChild('chartContainer', {static: false})
   chartcontainer: ElementRef;
@@ -67,8 +21,15 @@ export class HomePage {
   @ViewChild('chartcanvas', {static: false})
   chartcanvas: ElementRef;
 
+  @ViewChild('gaugeCanvas', {static: false})
+  gaugeCanvas: ElementRef;
+
   ngAfterViewInit() {
     this.createChart();
+
+    axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
+      this.renderGauge(data.aqi.realTime, data.category.realTime);
+    });
   }
 
 
@@ -124,4 +85,62 @@ export class HomePage {
       }
       });
       }
+
+  renderGauge(aqi, rating) {
+    const gauge = new GaugeService();
+    gauge.setCanvas(this.gaugeCanvas.nativeElement);
+    gauge.setImgSrc("../assets/img/aqi.png");
+    gauge.renderGauge(aqi, rating);
   }
+}
+
+
+let today = new Date();
+
+// check date
+let getYesterday = function(month, day, year) {
+  month = Number(month);
+  day = Number(day);
+  year = Number(year);
+
+  if (day === 1){
+    if(month === 0){
+      month = 11
+      day = 31
+      year--
+     } else {
+       month--
+       
+      if(month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9){
+        day = 31
+      }
+     
+       if(month === 3 || month === 5 || month === 8 || month === 10){
+         day = 30
+       }
+     }
+     if(month === 1){
+       
+      if(year % 4 === 0){
+        day = 29
+      } else {
+        day = 28
+      }
+    }
+   
+  } else{
+    day--
+  }
+ 
+  return month + "-" + day + "-" + year;
+}
+
+// print date
+let printDate = (sysDateString) => {
+  let parsedSysDate = sysDateString.split('-');
+  let sysMonth = parsedSysDate[0];
+  let sysDay = parsedSysDate[1];
+  let sysYear = parsedSysDate[2];
+
+  return `${Number(sysMonth)+1}-${sysDay}-${sysYear}`;
+}
