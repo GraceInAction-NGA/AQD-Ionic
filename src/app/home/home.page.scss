@@ -12,6 +12,14 @@
 ion-title img {
   max-width: 50%;
 }
+
+.chart-container{
+	position: relative;
+	height:40vh;
+	width:80vw;
+	margin:auto;
+}
+
 .center {
   display: flex;
   justify-content: center;
