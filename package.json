@@ -44,9 +44,8 @@
     "node-sass": "^4.13.1",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29",
-    "typescript": "~3.5.0"
-  },
-  "devDependencies": {
+    "typescript": "~3.5.0",
+    
     "@angular-devkit/architect": "~0.803.23",
     "@angular-devkit/build-angular": "^0.803.23",
     "@angular-devkit/core": "~8.3.23",
@@ -76,6 +75,9 @@
     "protractor": "~5.4.0",
     "ts-node": "~8.0.0",
     "tslint": "~5.12.0"
+  },
+  "devDependencies": {
+    
   },
   "description": "An Ionic project",
   "cordova": {
