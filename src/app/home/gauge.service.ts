@@ -42,8 +42,9 @@ export class GaugeService {
     }
 
     private getCanvasContext(canvas) {
-        this.WIDTH = window.innerWidth > 500 ? 500 : window.innerWidth;
-        this.HEIGHT = window.innerWidth > 500 ? 500 : window.innerWidth;
+        const CLIENTWIDTH = document.querySelector(".center").clientWidth;
+        this.WIDTH = CLIENTWIDTH > 500 ? 500 : CLIENTWIDTH;
+        this.HEIGHT = CLIENTWIDTH > 500 ? 500 : CLIENTWIDTH;
 
         canvas.width = this.WIDTH;
         canvas.height = this.HEIGHT;
