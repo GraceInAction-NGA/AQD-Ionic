@@ -33,7 +33,8 @@ export class GaugeService {
         const img = new Image();
         img.src = this.imgSrc;
 
-        img.onload = () => this.drawImage(ctx, img, aqi, rating)
+        const onload = () => this.drawImage(ctx, img, aqi, rating);
+        img.onload = onload.bind(this);
     }
 
     private drawImage(ctx: any, img: any, aqi: any, rating: any) {
@@ -71,11 +72,11 @@ export class GaugeService {
 
     private setText(ctx, aqi, rating) {
         ctx.save();
-        ctx.font = "75px Overlock";
+        ctx.font = "4em Overlock";
         ctx.fillStyle = "#555";
         ctx.textAlign = "center";
         ctx.fillText(String(aqi), this.WIDTH*0.5, this.HEIGHT*0.5+15);
-        ctx.font = "50px Overlock";
+        ctx.font = "3em Overlock";
         ctx.fillStyle = "#555";
         ctx.textAlign = "center";
         ctx.fillText(rating, this.WIDTH*0.5, (this.HEIGHT*0.5)+100);
