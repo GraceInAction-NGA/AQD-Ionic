@@ -76,7 +76,7 @@ export class GaugeService {
         ctx.fillStyle = "#555";
         ctx.textAlign = "center";
         ctx.fillText(String(aqi), this.WIDTH*0.5, this.HEIGHT*0.5+15);
-        ctx.font = "3em Overlock";
+        ctx.font = "2.5em Overlock";
         ctx.fillStyle = "#555";
         ctx.textAlign = "center";
         ctx.fillText(rating, this.WIDTH*0.5, (this.HEIGHT*0.5)+100);
