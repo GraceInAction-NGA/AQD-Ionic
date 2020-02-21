@@ -15,7 +15,7 @@ ion-title img {
 
 .chart-container{
 	position: relative;
-	height:40vh;
+	height:auto;
 	width:80vw;
 	margin:auto;
 }
@@ -24,7 +24,10 @@ ion-title img {
   display: flex;
   justify-content: center;
 }
-
+#AQI-recent{
+   min-height: 225px;
+   display: none;
+}
 #canvas {
   max-width: 100%;
 }
