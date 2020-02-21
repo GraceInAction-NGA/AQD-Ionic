@@ -3,7 +3,7 @@ import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
 
-@Component({
+@Component({  
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
@@ -64,12 +64,49 @@ export class HomePage {
 
     this.myChart = new Chart(this.chartcanvas.nativeElement, {
       type: 'line',
+ 
       data: {
         labels: bagOfDates.reverse(),
         datasets: [{  
             data: dailyData,
-            label: "PM 2.5",
-            borderColor: "#555",
+            label: "0-50",
+            borderColor: "#9bc69f",
+            fill: false,
+            // backgroundColor: "#9bc69f",
+            pointRadius: 9,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "51-100",
+            borderColor: "#f6db7a",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius: 9,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "101-150",
+            borderColor: "#fa845d",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius: 9,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "151-200",
+            borderColor: "#dc6e4c",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius: 9,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "200+",
+            borderColor: "#ba7fc3",
             fill: false,
             // backgroundColor: true,
             pointRadius: 9,
@@ -78,6 +115,7 @@ export class HomePage {
         ]
       },
       options: {
+        maintainAspectRatio: false,
         title: {
           display: true,
           text: ''
@@ -92,7 +130,7 @@ export class HomePage {
     gauge.setImgSrc("../assets/img/aqi.png");
     gauge.renderGauge(aqi, rating);
   }
-}
+}  
 
 
 let today = new Date();
@@ -132,7 +170,7 @@ let getYesterday = function(month, day, year) {
     day--
   }
  
-  return month + "-" + day + "-" + year;
+  return month + "-" + day + "-" ;
 }
 
 // print date
