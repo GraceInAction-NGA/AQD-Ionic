@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+ import { Component, ViewChild, ElementRef } from '@angular/core';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
@@ -64,7 +64,7 @@ export class HomePage {
 
     this.myChart = new Chart(this.chartcanvas.nativeElement, {
       type: 'line',
- 
+      
       data: {
         labels: bagOfDates.reverse(),
         datasets: [{  
@@ -73,7 +73,7 @@ export class HomePage {
             borderColor: "#9bc69f",
             fill: false,
             // backgroundColor: "#9bc69f",
-            pointRadius: 9,
+            pointRadius: 1,
             pointBackgroundColor: pointColors
           },
           {  
@@ -82,7 +82,7 @@ export class HomePage {
             borderColor: "#f6db7a",
             fill: false,
             // backgroundColor: true,
-            pointRadius: 9,
+            pointRadius: 1,
             pointBackgroundColor: pointColors
           },
           {  
@@ -91,7 +91,7 @@ export class HomePage {
             borderColor: "#fa845d",
             fill: false,
             // backgroundColor: true,
-            pointRadius: 9,
+            pointRadius: 1,
             pointBackgroundColor: pointColors
           },
           {  
@@ -100,7 +100,7 @@ export class HomePage {
             borderColor: "#dc6e4c",
             fill: false,
             // backgroundColor: true,
-            pointRadius: 9,
+            pointRadius: 1,
             pointBackgroundColor: pointColors
           },
           {  
@@ -109,12 +109,18 @@ export class HomePage {
             borderColor: "#ba7fc3",
             fill: false,
             // backgroundColor: true,
-            pointRadius: 9,
+            pointRadius:6,
             pointBackgroundColor: pointColors
           }
         ]
       },
       options: {
+        legend:{
+          labels:{
+            boxWidth: 3,
+          }
+        },
+
         maintainAspectRatio: false,
         title: {
           display: true,
@@ -170,7 +176,7 @@ let getYesterday = function(month, day, year) {
     day--
   }
  
-  return month + "-" + day + "-" ;
+  return month + "-" + day;
 }
 
 // print date
@@ -180,5 +186,5 @@ let printDate = (sysDateString) => {
   let sysDay = parsedSysDate[1];
   let sysYear = parsedSysDate[2];
 
-  return `${Number(sysMonth)+1}-${sysDay}-${sysYear}`;
+  return Number(sysMonth)+1+"-"+ Number(sysDay);
 }
