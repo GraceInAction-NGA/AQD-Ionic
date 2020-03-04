@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
@@ -12,8 +13,11 @@ import axios from "axios";
 
 export class HomePage {
   myChart: any;
+  gauge: any;
 
-  constructor(public GaugeService: GaugeService) {};
+  constructor(public GaugeService: GaugeService, public platform: Platform) {
+    this.InitiatePlatformIfReady();
+  };
 
   @ViewChild('chartContainer', {static: false})
   chartcontainer: ElementRef;
@@ -24,11 +28,18 @@ export class HomePage {
   @ViewChild('gaugeCanvas', {static: false})
   gaugeCanvas: ElementRef;
 
-  ngAfterViewInit() {
-    this.createChart();
+  InitiatePlatformIfReady() {
+    this.platform.ready().then(() => {
+      this.createChart();
 
-    axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
-      this.renderGauge(data.aqi.realTime, data.category.realTime);
+      axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
+        this.gauge = this.renderGauge(data.aqi.realTime, data.category.realTime);
+      }).finally(()=> {
+        let resize = () => this.gauge.resize()
+        let debouncedRerender = debounce(resize.bind(this), 250, false);
+
+        this.platform.resize.subscribe(debouncedRerender);
+      });
     });
   }
 
@@ -91,6 +102,7 @@ export class HomePage {
     gauge.setCanvas(this.gaugeCanvas.nativeElement);
     gauge.setImgSrc("../assets/img/aqi.png");
     gauge.renderGauge(aqi, rating);
+    return gauge;
   }
 }
 
@@ -144,3 +156,25 @@ let printDate = (sysDateString) => {
 
   return `${Number(sysMonth)+1}-${sysDay}-${sysYear}`;
 }
+
+let debounce = (func, wait, immediate) => {
+  var timeout;
+
+  return function executedFunction() {
+    var context = this;
+    var args = arguments;
+	    
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+	
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+	
+    if (callNow) func.apply(context, args);
+  };
+};

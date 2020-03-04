@@ -17,6 +17,8 @@ export class GaugeService {
     private MAX_AQI = 200;
     private SIN = Math.sin(Math.PI / 180);
     private COS = Math.cos(Math.PI / 180);
+    private AQI: any;
+    private RATING: any;
 
     constructor() {}
 
@@ -29,12 +31,18 @@ export class GaugeService {
     }
 
     renderGauge(aqi: any, rating: any) {
+        this.AQI = aqi;
+        this.RATING = rating;
         const ctx = this.getCanvasContext(this.canvas);
         const img = new Image();
         img.src = this.imgSrc;
 
         const onload = () => this.drawImage(ctx, img, aqi, rating);
         img.onload = onload.bind(this);
+    }
+
+    resize() {
+        this.renderGauge(this.AQI, this.RATING);
     }
 
     private drawImage(ctx: any, img: any, aqi: any, rating: any) {
