@@ -15,6 +15,9 @@ export class HomePage {
   myChart: any;
   gauge: any;
 
+  AQI_BASE_URL = "https://airqualid.herokuapp.com";
+  GAUGE_IMG = "../assets/img/aqi.png";
+
   constructor(public GaugeService: GaugeService, public platform: Platform) {
     this.InitiatePlatformIfReady();
   };
@@ -28,19 +31,16 @@ export class HomePage {
   @ViewChild('gaugeCanvas', {static: false})
   gaugeCanvas: ElementRef;
 
-  InitiatePlatformIfReady() {
-    this.platform.ready().then(() => {
+  async InitiatePlatformIfReady() {
+    try {
+      await this.platform.ready();
       this.createChart();
 
-      axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
-        this.gauge = this.renderGauge(data.aqi.realTime, data.category.realTime);
-      }).finally(()=> {
-        let resize = () => this.gauge.resize()
-        let debouncedRerender = debounce(resize.bind(this), 250, false);
-
-        this.platform.resize.subscribe(debouncedRerender);
-      });
-    });
+      await this.renderGauge();
+      this.subGaugeResize();
+    } catch(e) {
+      console.log("Platform failed to initialize.")
+    }
   }
 
 
@@ -97,12 +97,23 @@ export class HomePage {
       });
       }
 
-  renderGauge(aqi, rating) {
-    const gauge = new GaugeService();
-    gauge.setCanvas(this.gaugeCanvas.nativeElement);
-    gauge.setImgSrc("../assets/img/aqi.png");
-    gauge.renderGauge(aqi, rating);
-    return gauge;
+  async renderGauge() {
+    try {
+      const {data} = await axios.get(`${this.AQI_BASE_URL}/latest`);
+      this.gauge = new GaugeService();
+      this.gauge.setCanvas(this.gaugeCanvas.nativeElement);
+      this.gauge.setImgSrc(this.GAUGE_IMG);
+      this.gauge.renderGauge(data.aqi.realTime, data.category.realTime);
+    } catch (e) {
+      console.log("Unable to get latest aqi.")
+      return Promise.reject(e);
+    }
+  }
+
+  subGaugeResize() {
+    const resize = () => this.gauge.resize()
+    const debouncedRerender = debounce(resize.bind(this), 250, false);
+    this.platform.resize.subscribe(debouncedRerender);
   }
 }
 
