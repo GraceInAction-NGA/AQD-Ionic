@@ -2,6 +2,8 @@
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
+import * as firebase from 'firebase';
+import firebaseConfig from '../../env';
 
 @Component({  
   selector: 'app-home',
@@ -12,6 +14,7 @@ import axios from "axios";
 
 export class HomePage {
   myChart: any;
+  AqiOfWeek:any;
 
   constructor(public GaugeService: GaugeService) {};
 
@@ -25,11 +28,34 @@ export class HomePage {
   gaugeCanvas: ElementRef;
 
   ngAfterViewInit() {
-    this.createChart();
+    
+            this.AqiOfWeek = [];
 
     axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
       this.renderGauge(data.aqi.realTime, data.category.realTime);
     });
+    let promiseSuccess = function(snapshot) {
+
+        snapshot.forEach(doc => {
+          if(this.AqiOfWeek.length > 5){
+            this.AqiOfWeek.push(doc.data().aqi.realTime)
+          }else{
+            this.AqiOfWeek.push(doc.data().aqi.twentyfourHours)
+          } 
+         })
+    }
+
+
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.firestore()
+      .collection('aqis')
+      .limit(7)
+      .get()
+      .then(promiseSuccess.bind(this));
+      console.log(this.AqiOfWeek, "2.0");
+    this.createChart();
+
   }
 
 
@@ -42,7 +68,7 @@ export class HomePage {
       date = getYesterday(date.split('-')[0],date.split('-')[1],date.split('-')[2])  
       bagOfDates.push(printDate(date))
     }
-    let dailyData = [6,3,2,2,40,86,105,172,312];
+    let dailyData = this.AqiOfWeek;
     let pointColors = [];
 
     for(i=0;i < dailyData.length; i++){
@@ -64,7 +90,6 @@ export class HomePage {
 
     this.myChart = new Chart(this.chartcanvas.nativeElement, {
       type: 'line',
-      
       data: {
         labels: bagOfDates.reverse(),
         datasets: [{  
@@ -120,7 +145,6 @@ export class HomePage {
             boxWidth: 3,
           }
         },
-
         maintainAspectRatio: false,
         title: {
           display: true,
