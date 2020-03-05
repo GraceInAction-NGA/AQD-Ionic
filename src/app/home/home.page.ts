@@ -1,4 +1,5 @@
- import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
@@ -15,8 +16,14 @@ import firebaseConfig from '../../env';
 export class HomePage {
   myChart: any;
   AqiOfWeek:any;
+  gauge: any;
 
-  constructor(public GaugeService: GaugeService) {};
+  AQI_BASE_URL = "https://airqualid.herokuapp.com";
+  GAUGE_IMG = "../assets/img/aqi.png";
+
+  constructor(public GaugeService: GaugeService, public platform: Platform) {
+    this.InitiatePlatformIfReady();
+  };
 
   @ViewChild('chartContainer', {static: false})
   chartcontainer: ElementRef;
@@ -28,23 +35,18 @@ export class HomePage {
   gaugeCanvas: ElementRef;
 
   ngAfterViewInit() {
-    
-            this.AqiOfWeek = [];
+    this.AqiOfWeek = [];
 
-    axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
-      this.renderGauge(data.aqi.realTime, data.category.realTime);
-    });
     let promiseSuccess = function(snapshot) {
 
-        snapshot.forEach(doc => {
-          if(this.AqiOfWeek.length > 5){
-            this.AqiOfWeek.push(doc.data().aqi.realTime)
-          }else{
-            this.AqiOfWeek.push(doc.data().aqi.twentyfourHours)
-          } 
-         })
+      snapshot.forEach(doc => {
+        if (this.AqiOfWeek.length > 5){
+          this.AqiOfWeek.push(doc.data().aqi.realTime)
+        } else{
+          this.AqiOfWeek.push(doc.data().aqi.twentyfourHours)
+        } 
+      })
     }
-
 
     firebase.initializeApp(firebaseConfig);
 
@@ -54,8 +56,18 @@ export class HomePage {
       .get()
       .then(promiseSuccess.bind(this));
       console.log(this.AqiOfWeek, "2.0");
-    this.createChart();
+  }
 
+  async InitiatePlatformIfReady() {
+    try {
+      await this.platform.ready();
+      this.createChart();
+
+      await this.renderGauge();
+      this.subGaugeResize();
+    } catch(e) {
+      console.log("Platform failed to initialize.")
+    }
   }
 
 
@@ -155,11 +167,23 @@ export class HomePage {
       });
       }
 
-  renderGauge(aqi, rating) {
-    const gauge = new GaugeService();
-    gauge.setCanvas(this.gaugeCanvas.nativeElement);
-    gauge.setImgSrc("../assets/img/aqi.png");
-    gauge.renderGauge(aqi, rating);
+  async renderGauge() {
+    try {
+      const {data} = await axios.get(`${this.AQI_BASE_URL}/latest`);
+      this.gauge = new GaugeService();
+      this.gauge.setCanvas(this.gaugeCanvas.nativeElement);
+      this.gauge.setImgSrc(this.GAUGE_IMG);
+      this.gauge.renderGauge(data.aqi.realTime, data.category.realTime);
+    } catch (e) {
+      console.log("Unable to get latest aqi.")
+      return Promise.reject(e);
+    }
+  }
+
+  subGaugeResize() {
+    const resize = () => this.gauge.resize()
+    const debouncedRerender = debounce(resize.bind(this), 250, false);
+    this.platform.resize.subscribe(debouncedRerender);
   }
 }  
 
@@ -213,3 +237,25 @@ let printDate = (sysDateString) => {
 
   return Number(sysMonth)+1+"-"+ Number(sysDay);
 }
+
+let debounce = (func, wait, immediate) => {
+  var timeout;
+
+  return function executedFunction() {
+    var context = this;
+    var args = arguments;
+	    
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+	
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+	
+    if (callNow) func.apply(context, args);
+  };
+};

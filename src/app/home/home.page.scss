@@ -1,3 +1,6 @@
+html {
+  font-size: 10px;
+}
 .welcome-card ion-img {
   max-height: 35vh;
   overflow: hidden;
@@ -15,11 +18,7 @@ ion-title img {
 
 .chart-container{
 	position: relative;
-<<<<<<< HEAD
-	height:40vh;
-=======
 	height:auto;
->>>>>>> 84c5ebd44466af02979970386394f85d602601ce
 	width:80vw;
 	margin:auto;
 }
@@ -28,8 +27,7 @@ ion-title img {
   display: flex;
   justify-content: center;
 }
-<<<<<<< HEAD
-=======
+
 #AQI-recent{
    min-height: 225px;
    display: none;
@@ -40,4 +38,3 @@ ion-title img {
 .card-title h2{
   text-align: center;
 }
->>>>>>> 84c5ebd44466af02979970386394f85d602601ce
