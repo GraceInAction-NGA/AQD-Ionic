@@ -8,6 +8,7 @@ export class GaugeService {
     private canvas: any;
     private imgSrc: any;
 
+    private MAX_WIDTH = 500;
     private WIDTH = 500;
     private HEIGHT = 500;
     private MIN_DEGREE = 144;
@@ -16,6 +17,8 @@ export class GaugeService {
     private MAX_AQI = 200;
     private SIN = Math.sin(Math.PI / 180);
     private COS = Math.cos(Math.PI / 180);
+    private AQI: any;
+    private RATING: any;
 
     constructor() {}
 
@@ -28,22 +31,30 @@ export class GaugeService {
     }
 
     renderGauge(aqi: any, rating: any) {
-      const ctx = this.getCanvasContext(this.canvas);
-      const img = new Image();
-      img.src = this.imgSrc;
+        this.AQI = aqi;
+        this.RATING = rating;
+        const ctx = this.getCanvasContext(this.canvas);
+        const img = new Image();
+        img.src = this.imgSrc;
 
-      const a = function() {
+        const onload = () => this.drawImage(ctx, img, aqi, rating);
+        img.onload = onload.bind(this);
+    }
+
+    resize() {
+        this.renderGauge(this.AQI, this.RATING);
+    }
+
+    private drawImage(ctx: any, img: any, aqi: any, rating: any) {
         ctx.drawImage(img, 0, 0, this.WIDTH, this.HEIGHT);
         this.setMarker(ctx, aqi);
         this.setText(ctx, aqi, rating);
-     };
-  
-      img.onload = a.bind(this);
     }
 
     private getCanvasContext(canvas) {
-        this.WIDTH = window.innerWidth > 500 ? 500 : window.innerWidth;
-        this.HEIGHT = window.innerWidth > 500 ? 500 : window.innerWidth;
+        const CLIENTWIDTH = document.querySelector(".center").clientWidth;
+        this.WIDTH = CLIENTWIDTH > this.MAX_WIDTH ? this.MAX_WIDTH : CLIENTWIDTH;
+        this.HEIGHT = this.WIDTH;
 
         canvas.width = this.WIDTH;
         canvas.height = this.HEIGHT;
@@ -69,12 +80,14 @@ export class GaugeService {
 
     private setText(ctx, aqi, rating) {
         ctx.save();
-        ctx.font = "50px Arial";
+        ctx.font = "4em Overlock";
+        ctx.fillStyle = "#555";
         ctx.textAlign = "center";
-        ctx.fillText(String(aqi), this.WIDTH*0.5, this.HEIGHT*0.5);
-        ctx.font = "30px Arial";
+        ctx.fillText(String(aqi), this.WIDTH*0.5, this.HEIGHT*0.5+15);
+        ctx.font = "2.5em Overlock";
+        ctx.fillStyle = "#555";
         ctx.textAlign = "center";
-        ctx.fillText(rating, this.WIDTH*0.5, (this.HEIGHT*0.5)+60);
+        ctx.fillText(rating, this.WIDTH*0.5, (this.HEIGHT*0.5)+100);
         ctx.restore();
     }
 
@@ -90,5 +103,4 @@ export class GaugeService {
         const scale = (aqi_norm > this.MAX_AQI) ? 1 : (aqi_norm / this.MAX_AQI);
         return Math.round(((this.HIGH_DEGREE - this.MIN_DEGREE) * scale) + this.MIN_DEGREE);
     };
-
 }
