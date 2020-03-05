@@ -1,9 +1,11 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+ import { Component, ViewChild, ElementRef } from '@angular/core';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
+import * as firebase from 'firebase';
+import firebaseConfig from '../../env';
 
-@Component({
+@Component({  
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
@@ -12,6 +14,7 @@ import axios from "axios";
 
 export class HomePage {
   myChart: any;
+  AqiOfWeek:any;
 
   constructor(public GaugeService: GaugeService) {};
 
@@ -25,11 +28,34 @@ export class HomePage {
   gaugeCanvas: ElementRef;
 
   ngAfterViewInit() {
-    this.createChart();
+    
+            this.AqiOfWeek = [];
 
     axios.get("https://airqualid.herokuapp.com/latest").then(({data}) => {
       this.renderGauge(data.aqi.realTime, data.category.realTime);
     });
+    let promiseSuccess = function(snapshot) {
+
+        snapshot.forEach(doc => {
+          if(this.AqiOfWeek.length > 5){
+            this.AqiOfWeek.push(doc.data().aqi.realTime)
+          }else{
+            this.AqiOfWeek.push(doc.data().aqi.twentyfourHours)
+          } 
+         })
+    }
+
+
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.firestore()
+      .collection('aqis')
+      .limit(7)
+      .get()
+      .then(promiseSuccess.bind(this));
+      console.log(this.AqiOfWeek, "2.0");
+    this.createChart();
+
   }
 
 
@@ -42,7 +68,8 @@ export class HomePage {
       date = getYesterday(date.split('-')[0],date.split('-')[1],date.split('-')[2])  
       bagOfDates.push(printDate(date))
     }
-    let dailyData = [6,3,2,2,40,86,105,172,312];
+
+    let dailyData = this.AqiOfWeek;
     let pointColors = [];
 
     for(i=0;i < dailyData.length; i++){
@@ -68,16 +95,58 @@ export class HomePage {
         labels: bagOfDates.reverse(),
         datasets: [{  
             data: dailyData,
-            label: "PM 2.5",
-            borderColor: "#555",
+            label: "0-50",
+            borderColor: "#9bc69f",
+            fill: false,
+            // backgroundColor: "#9bc69f",
+            pointRadius: 1,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "51-100",
+            borderColor: "#f6db7a",
             fill: false,
             // backgroundColor: true,
-            pointRadius: 9,
+            pointRadius: 1,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "101-150",
+            borderColor: "#fa845d",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius: 1,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "151-200",
+            borderColor: "#dc6e4c",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius: 1,
+            pointBackgroundColor: pointColors
+          },
+          {  
+            data: dailyData,
+            label: "200+",
+            borderColor: "#ba7fc3",
+            fill: false,
+            // backgroundColor: true,
+            pointRadius:6,
             pointBackgroundColor: pointColors
           }
         ]
       },
       options: {
+        legend:{
+          labels:{
+            boxWidth: 3,
+          }
+        },
+        maintainAspectRatio: false,
         title: {
           display: true,
           text: ''
@@ -92,7 +161,7 @@ export class HomePage {
     gauge.setImgSrc("../assets/img/aqi.png");
     gauge.renderGauge(aqi, rating);
   }
-}
+}  
 
 
 let today = new Date();
@@ -132,7 +201,7 @@ let getYesterday = function(month, day, year) {
     day--
   }
  
-  return month + "-" + day + "-" + year;
+  return month + "-" + day;
 }
 
 // print date
@@ -142,5 +211,5 @@ let printDate = (sysDateString) => {
   let sysDay = parsedSysDate[1];
   let sysYear = parsedSysDate[2];
 
-  return `${Number(sysMonth)+1}-${sysDay}-${sysYear}`;
+  return Number(sysMonth)+1+"-"+ Number(sysDay);
 }
