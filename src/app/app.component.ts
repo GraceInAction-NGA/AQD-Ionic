@@ -16,11 +16,11 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
-    {
-      title: 'History',
-      url: '/list',
-      icon: 'analytics'
-    },
+    // {
+    //   title: 'History',
+    //   url: '/list',
+    //   icon: 'analytics'
+    // },
     {
       title: 'About',
       url: '/about',
