@@ -3,9 +3,6 @@ import { Platform } from '@ionic/angular';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-import firebaseConfig from '../../env';
 
 @Component({  
   selector: 'app-home',
@@ -38,25 +35,18 @@ export class HomePage {
   ngAfterViewInit() {
     this.AqiOfWeek = [];
 
-    let promiseSuccess = function(snapshot) {
-
-      snapshot.forEach(doc => {
+    let promiseSuccess = function({data}) {
+      data.forEach(aqi => {
         if (this.AqiOfWeek.length > 5){
-          this.AqiOfWeek.push(doc.data().aqi.realTime)
+          this.AqiOfWeek.push(aqi.aqi.realTime)
         } else{
-          this.AqiOfWeek.push(doc.data().aqi.twentyfourHours)
+          this.AqiOfWeek.push(aqi.aqi.twentyfourHours)
         } 
-      })
-    }
+      });
+    };
 
-    firebase.initializeApp(firebaseConfig);
-
-    firebase.firestore()
-      .collection('aqis')
-      .limit(7)
-      .get()
+    axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`)
       .then(promiseSuccess.bind(this));
-      console.log(this.AqiOfWeek, "2.0");
   }
 
   async InitiatePlatformIfReady() {
