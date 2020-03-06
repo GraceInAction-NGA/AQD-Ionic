@@ -3,7 +3,8 @@ import { Platform } from '@ionic/angular';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 import firebaseConfig from '../../env';
 
 @Component({  
