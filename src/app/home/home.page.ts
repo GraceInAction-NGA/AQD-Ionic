@@ -3,7 +3,10 @@ import { Platform } from '@ionic/angular';
 import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
 import axios from "axios";
-
+let bagOfDates = ['Today'];
+let numBagOfDates = [];
+let dataDates = [];
+let aqis = [];
 @Component({  
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -43,6 +46,32 @@ export class HomePage {
           this.AqiOfWeek.push(aqi.aqi.twentyfourHours)
         } 
       });
+       this.createChart();
+       console.log(data);
+       
+
+       for(let i = 0; i <10; i++){
+          numBagOfDates.push(parseInt(bagOfDates[i], 10))
+          const d = new Date(data[i].timestamp);
+          dataDates.push(d.getDate())
+       }
+       for(let i = 0; i < 10; i++){
+           for(let j = 0; j < 10; j++){
+             if(numBagOfDates[i] == dataDates[j]){
+               console.log("succes?")
+               aqis.push(data[j].aqi)
+             }else{
+               console.log("unsuccess")
+               aqis.push(0)//fAiL
+             }
+           }
+       }
+       console.log(dataDates)
+        if(numBagOfDates == dataDates){
+         console.log("well done you are getting the right date")
+       }else{
+         console.log("no")
+       }  
     };
 
     axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`)
@@ -52,7 +81,6 @@ export class HomePage {
   async InitiatePlatformIfReady() {
     try {
       await this.platform.ready();
-      this.createChart();
 
       await this.renderGauge();
       this.subGaugeResize();
@@ -64,8 +92,8 @@ export class HomePage {
 
   createChart() {
 
-    let bagOfDates = ['Today'];
     let date = today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear();
+
 
     for (var i = 8; i >= 0; i--) {
       date = getYesterday(date.split('-')[0],date.split('-')[1],date.split('-')[2])  
@@ -129,7 +157,7 @@ export class HomePage {
             borderColor: "#dc6e4c",
             fill: false,
             // backgroundColor: true,
-            pointRadius: 1,
+            pointRadius: 6,
             pointBackgroundColor: pointColors
           },
           {  
