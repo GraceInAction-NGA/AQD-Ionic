@@ -13,7 +13,6 @@ import axios from "axios";
 
 export class HomePage {
   myChart: any;
-  AqiOfWeek:any;
   gauge: any;
 
   AQI_BASE_URL = "https://airqualid.herokuapp.com";
@@ -32,48 +31,31 @@ export class HomePage {
   @ViewChild('gaugeCanvas', {static: false})
   gaugeCanvas: ElementRef;
 
-  ngAfterViewInit() {
-    this.AqiOfWeek = [];
-
-    let promiseSuccess = function({data}) {
-      data.forEach(aqi => {
-        if (this.AqiOfWeek.length > 5){
-          this.AqiOfWeek.push(aqi.aqi.realTime)
-        } else{
-          this.AqiOfWeek.push(aqi.aqi.twentyfourHours)
-        } 
-      });
-    };
-
-    axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`)
-      .then(promiseSuccess.bind(this));
-  }
-
   async InitiatePlatformIfReady() {
     try {
       await this.platform.ready();
-      this.createChart();
-
+    
       await this.renderGauge();
       this.subGaugeResize();
+
+      await this.createChart();
     } catch(e) {
       console.log("Platform failed to initialize.")
     }
   }
 
 
-  createChart() {
+  async createChart() {
+    const dailyData = await this.getWeeklyAqis();
+    let pointColors = [];
 
     let bagOfDates = ['Today'];
     let date = today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear();
 
     for (var i = 8; i >= 0; i--) {
-      date = getYesterday(date.split('-')[0],date.split('-')[1],date.split('-')[2])  
+      date = getYesterday(date.split('-')[0], date.split('-')[1], date.split('-')[2])  
       bagOfDates.push(printDate(date))
     }
-
-    let dailyData = this.AqiOfWeek;
-    let pointColors = [];
 
     for(i=0;i < dailyData.length; i++){
       if(dailyData[i] <= 50){
@@ -87,59 +69,47 @@ export class HomePage {
       }else{
         pointColors[i] = "#ba7fc3"
       }
+      dailyData[i] = dailyData[i] - 10;
     }
-
-  
-
 
     this.myChart = new Chart(this.chartcanvas.nativeElement, {
       type: 'line',
       data: {
         labels: bagOfDates.reverse(),
         datasets: [{  
-            data: dailyData,
+            data: [14, 34, null, 41, 41, 40, 40, 24, 31, 1],
             label: "0-50",
+            showLine: true,
             borderColor: "#9bc69f",
             fill: false,
-            // backgroundColor: "#9bc69f",
-            pointRadius: 1,
-            pointBackgroundColor: pointColors
+            backgroundColor: "#9bc69f",
+            type: "scatter",
+            pointRadius: 5,
           },
           {  
-            data: dailyData,
+            data: [null, 34, 65, 41],
             label: "51-100",
             borderColor: "#f6db7a",
             fill: false,
-            // backgroundColor: true,
-            pointRadius: 1,
-            pointBackgroundColor: pointColors
+            backgroundColor: "#f6db7a",
+            type: "scatter",
+            pointRadius: 5,
+            showLine: true,
           },
           {  
-            data: dailyData,
+            data: [undefined, 34],
             label: "101-150",
             borderColor: "#fa845d",
             fill: false,
-            // backgroundColor: true,
-            pointRadius: 1,
-            pointBackgroundColor: pointColors
-          },
-          {  
-            data: dailyData,
-            label: "151-200",
-            borderColor: "#dc6e4c",
+          },{  
+            data: [14, 34, 65, 41, 41, 40, 40, 24, 31, 1],
+            label: "",
+            borderColor: "#ddd",
             fill: false,
-            // backgroundColor: true,
-            pointRadius: 1,
-            pointBackgroundColor: pointColors
-          },
-          {  
-            data: dailyData,
-            label: "200+",
-            borderColor: "#ba7fc3",
-            fill: false,
-            // backgroundColor: true,
-            pointRadius:6,
-            pointBackgroundColor: pointColors
+            backgroundColor: "#ddd",
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            showLine: true
           }
         ]
       },
@@ -176,6 +146,14 @@ export class HomePage {
     const debouncedRerender = debounce(resize.bind(this), 250, false);
     this.platform.resize.subscribe(debouncedRerender);
   }
+
+  async getWeeklyAqis() {
+    const {data} = await axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`);
+    return data.reduce((acc, {aqi}) => {
+      const newAqi = acc.length > 8 ? aqi.realTime : aqi.twentyfourHours;
+      return [...acc, newAqi];
+    }, []);
+  };
 }  
 
 
