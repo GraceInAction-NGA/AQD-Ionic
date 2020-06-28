@@ -44,13 +44,13 @@ export class HomePage {
     }
   }
 
-
   async createChart() {
     const dailyData = await this.getWeeklyAqis();
     let pointColors = [];
-
     let bagOfDates = ['Today'];
+
     let date = today.getMonth() + '-' + today.getDate() + '-' + today.getFullYear();
+
 
     for (var i = 8; i >= 0; i--) {
       date = getYesterday(date.split('-')[0], date.split('-')[1], date.split('-')[2])  
