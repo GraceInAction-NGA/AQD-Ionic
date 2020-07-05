@@ -1,15 +1,13 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import {Chart} from "chart.js";
 import {GaugeService} from "./gauge.service";
-import {ChartService} from "./chart.service";
 import axios from "axios";
 
 @Component({  
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  providers: [GaugeService, ChartService],
+  providers: [GaugeService],
 })
 
 export class HomePage {
@@ -20,15 +18,9 @@ export class HomePage {
   AQI_BASE_URL = "https://airqualid.herokuapp.com";
   GAUGE_IMG = "../assets/img/aqi.png";
 
-  constructor(public GaugeService: GaugeService, public ChartService: ChartService, public platform: Platform) {
+  constructor(public GaugeService: GaugeService, public platform: Platform) {
     this.InitiatePlatformIfReady();
   };
-
-  @ViewChild('chartContainer', {static: false})
-  chartcontainer: ElementRef;
-
-  @ViewChild('chartcanvas', {static: false})
-  chartcanvas: ElementRef;
 
   @ViewChild('gaugeCanvas', {static: false})
   gaugeCanvas: ElementRef;
@@ -39,20 +31,9 @@ export class HomePage {
     
       await this.renderGauge();
       this.subGaugeResize();
-
-      await this.renderChart();
     } catch(e) {
       console.log("Platform failed to initialize.")
     }
-  }
-
-  async renderChart() {
-    let today = new Date();
-    this.chart = new ChartService();
-    this.chart.setDate(today);
-
-    const dailyData = await this.getWeeklyAqis();
-    this.chart.createChart(dailyData, this.chartcanvas)
   }
 
   async renderGauge() {
@@ -73,14 +54,6 @@ export class HomePage {
     const debouncedRerender = debounce(resize.bind(this), 250, false);
     this.platform.resize.subscribe(debouncedRerender);
   }
-
-  async getWeeklyAqis() {
-    const {data} = await axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`);
-    return data.reduce((acc, {aqi}) => {
-      const newAqi = acc.length == 8 ? aqi.realTime : aqi.twentyfourHours;
-      return [...acc, newAqi];
-    }, []);
-  };
 }  
 
 let debounce = (func, wait, immediate) => {

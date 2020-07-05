@@ -1,24 +1,43 @@
 import 'core-js/es7/reflect';
-import { Injectable } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';  
 import {Chart} from "chart.js";
+import axios from "axios";
 
-@Injectable({
-    providedIn: 'root',
+@Component({  
+  selector: 'LineChart',  
+  templateUrl: './linechart.component.html',  
+  styleUrls: ['./linechart.component.css']  
 })
 
-export class ChartService {
+export class LineChart implements OnInit {
     private TODAY: Date;
+    AQI_BASE_URL = "https://airqualid.herokuapp.com";
 
-    setDate(date: Date) {
-        this.TODAY = date;
+    @ViewChild('lineChart', {static: false})
+    lineChart: ElementRef;
+
+    constructor() { }
+
+    async ngOnInit() {
+      const data: Array<any> = await this.getWeeklyAqis();
+      this.TODAY = new Date();
+      this.createChart(data);
     }
 
-    async createChart(data: Array<any>, chartCanvas: any) {    
+    async getWeeklyAqis() {
+      const {data} = await axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`);
+      return data.reduce((acc, {aqi}) => {
+        const newAqi = acc.length == 0 ? aqi.realTime : aqi.twentyfourHours;
+        return [...acc, newAqi];
+      }, []);
+    };
+
+    async createChart(data: Array<any>) {    
         Chart.pluginService.register({
             beforeDraw: this.renderGradientBackground
         });
         
-        return new Chart(chartCanvas.nativeElement, {
+        return new Chart(this.lineChart.nativeElement, {
           type: 'line',
           data: {
             labels: this.getDailyLabels(),
@@ -56,7 +75,7 @@ export class ChartService {
               ]
             }
           }
-          });
+        });
     }
 
     renderGradientBackground(chart: any) {
