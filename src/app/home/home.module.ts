@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { LineChart } from './components/linechart/linechart.component';
+import { Gauge } from './components/gauge/gauge.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { LineChart } from './components/linechart/linechart.component';
       }
     ])
   ],
-  declarations: [HomePage, LineChart]
+  declarations: [HomePage, LineChart, Gauge]
 })
 export class HomePageModule {}
