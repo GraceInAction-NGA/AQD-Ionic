@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import axios from "axios";
 
@@ -9,6 +9,8 @@ import axios from "axios";
 })
 
 export class Gauge { 
+  @Output() outputStatement = new EventEmitter<String>();
+
   AQI_BASE_URL = "https://airqualid.herokuapp.com";
   GAUGE_IMG = "../../../assets/img/aqi.png";
 
@@ -40,12 +42,30 @@ export class Gauge {
       this.setCanvas(this.gaugeCanvas.nativeElement);
       this.setImgSrc(this.GAUGE_IMG);
       this.renderGauge(data.aqi.realTime, data.category.realTime);
+      this.emitData(data.aqi.realTime);
     } catch (e) {
       console.log("Unable to get latest aqi.")
       return Promise.reject(e);
     }
 
     this.subGaugeResize();
+  }
+
+  emitData(aqi: Number) {
+    let statement = "";
+    if (aqi <= 50) {
+      statement = "If you can go outside, GO OUTSIDE, no real pollution concern";
+    } else if (aqi <= 100) {
+      statement = 'Carry your inhaler, it is a “lovely” day!';
+    } else if (aqi <= 150) {
+      statement = "Go outside if you need to, but be cautious about exercising";
+    } else if (aqi <= 200) {
+      statement = "It’s a good day for Netflix, it’s a bad day for your lungs! Everyone will experience negative health effects";
+    } else {
+      statement = "bruh"
+    }
+
+    this.outputStatement.emit(statement);
   }
 
   subGaugeResize() {

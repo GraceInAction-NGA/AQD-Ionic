@@ -42,7 +42,7 @@ export class LineChart implements OnInit {
           data: {
             labels: this.getDailyLabels(),
             datasets: [{  
-                data: data,
+                data: data.reverse(),
                 label: "AQIS",
                 showLine: true,
                 borderColor: "#555",
@@ -94,11 +94,11 @@ export class LineChart implements OnInit {
             gradient.addColorStop(.75* scale, '#dc6e4c');
             gradient.addColorStop(1*scale, '#ba7fc3');
         } else {
-            gradient.addColorStop(0, '#9bc69f');
-            gradient.addColorStop(.25, '#f6db7a');
-            gradient.addColorStop(.50, '#fa845d');
-            gradient.addColorStop(.75, '#dc6e4c');
-            gradient.addColorStop(1, '#ba7fc3');
+            gradient.addColorStop(0, '#9bc69f'); // 0 - 50
+            gradient.addColorStop(.25, '#f6db7a'); // 50 - 100
+            gradient.addColorStop(.50, '#fa845d'); // 100 - 150
+            gradient.addColorStop(.75, '#dc6e4c'); // 150 - 200
+            gradient.addColorStop(1, '#ba7fc3'); // 200
         }
         
         ctx.save();

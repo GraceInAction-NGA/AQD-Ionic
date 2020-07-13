@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content class="gradient-bg home ion-padding">
-  <Gauge></Gauge>
+  <Gauge (outputStatement)="statement = $event"></Gauge>
 
-  <p class="center-text" id="statement">Air quality is considered good enough, and air pollution poses little or no risk</p>
+  <p class="center-text" id="statement">{{statement}}</p>
 
   <ion-icon name="ios-arrow-down" expand="full"></ion-icon>
 

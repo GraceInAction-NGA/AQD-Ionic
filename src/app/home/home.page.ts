@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +7,6 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 
 export class HomePage {
-  constructor() {};
+  constructor() {
+  };
 }
