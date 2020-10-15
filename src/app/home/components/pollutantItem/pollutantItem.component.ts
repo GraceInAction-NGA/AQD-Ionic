@@ -22,7 +22,7 @@ export class PollutantItem {
         component: Popover,
         cssClass: 'module-popover2',
         event: ev,
-        componentProps: {data: "hello"},
+        componentProps: {data: this.data},
         translucent: false
       });
       this.popover.style.cssText = '--min-width: 90%; --max-width: 100%; --min-height: 90%; --max-height: 100%;';
