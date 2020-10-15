@@ -1,5 +1,10 @@
-li {
+.pollutantItemContainer {
     padding:0.5em;
     margin-bottom: 1em;
-    background: purple ;
+    background: #9BC69F;
+    color: #555555;
+    height: 82px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
 }

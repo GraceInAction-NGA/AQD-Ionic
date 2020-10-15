@@ -1,1 +1,12 @@
-<li (click)="presentPopover()">{{data.label}}<span>: <b>{{data.value}}</b></span></li>
+<li class="pollutantItemContainer" (click)="presentPopover()">
+    <!-- Item 1 -->
+    <div>
+        <p id="label">{{data.label}}</p>
+        <p>{{data.unit}}</p>
+    </div>
+    <!-- Item 2 -->
+    <div>
+        <p><b>{{data.value}}</b></p>
+        <p>{{data.status}}</p>
+    </div>
+</li>

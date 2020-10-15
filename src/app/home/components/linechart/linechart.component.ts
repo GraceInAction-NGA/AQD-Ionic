@@ -90,15 +90,15 @@ export class LineChart implements OnInit {
             const scale = 250/max;
             gradient.addColorStop(0, '#9bc69f');
             gradient.addColorStop(.25* scale, '#f6db7a');
-            gradient.addColorStop(.50* scale, '#fa845d');
+            gradient.addColorStop(.50* scale, '#F5935B');
             gradient.addColorStop(.75* scale, '#dc6e4c');
-            gradient.addColorStop(1*scale, '#ba7fc3');
+            gradient.addColorStop(1*scale, '#BA7FC3');
         } else {
             gradient.addColorStop(0, '#9bc69f'); // 0 - 50
             gradient.addColorStop(.25, '#f6db7a'); // 50 - 100
-            gradient.addColorStop(.50, '#fa845d'); // 100 - 150
+            gradient.addColorStop(.50, '#F5935B'); // 100 - 150
             gradient.addColorStop(.75, '#dc6e4c'); // 150 - 200
-            gradient.addColorStop(1, '#ba7fc3'); // 200
+            gradient.addColorStop(1, '#BA7FC3'); // 200
         }
         
         ctx.save();

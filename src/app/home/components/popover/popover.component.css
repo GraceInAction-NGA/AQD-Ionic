@@ -1,0 +1,21 @@
+#popover_title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 0rem;
+}
+
+#popover_text {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.swiper-slide {
+    height: 100%;
+}
+
+.slide-wrapper {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    height: 100%;
+}

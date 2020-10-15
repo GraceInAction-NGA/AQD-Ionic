@@ -16,13 +16,13 @@ export class PollutantItem {
 
     }
     async presentPopover(ev: any) {
-      console.log("i got clicked")
-      const popover2 = await this.popoverController.create({
+      const popover = await this.popoverController.create({
         component: Popover,
-        cssClass: 'my-custom-class',
+        cssClass: 'module-popover2',
         event: ev,
-        translucent: true
+        translucent: false
       });
-      return await popover2.present();
+      popover.style.cssText = '--min-width: 90%; --max-width: 100%; --min-height: 90%; --max-height: 100%;';
+      return await popover.present();
     }
 }
