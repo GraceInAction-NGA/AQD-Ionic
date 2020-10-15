@@ -10,7 +10,7 @@ import axios from "axios";
 
 export class Popover {
   @Input() data;
-
+  @Input() popover;
   constructor() { 
   }
 
