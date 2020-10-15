@@ -1,7 +1,37 @@
-#popover_title {
-    text-align: center;
+.popover_title_wrapper {
+    background: #89D6E0;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popover_title_wrapper button {
+    background: none;
+}
+
+.popover_title_wrapper button img {
+    width: 22px;
+    height: 22px;
+}
+
+.green {
+    background: #9BC69F;
+}
+.yellow {
+    background: #F6DB7A;
+}
+.orange {
+    background: #F5935B;
+}
+.red {
+    background: #DC6E4C;
+}
+
+.popover_title {
+    text-align: left;
     font-size: 2rem;
     margin-bottom: 0rem;
+    margin-top: 0rem;
 }
 
 #popover_text {

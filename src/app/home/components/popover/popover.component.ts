@@ -9,5 +9,12 @@ import axios from "axios";
 })
 
 export class Popover {
-    
+  @Input() data;
+
+  constructor() { 
+  }
+
+  dismiss() {
+    this.popover.dismiss();
+  }
 }

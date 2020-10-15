@@ -12,17 +12,20 @@ import { Popover } from '../popover/popover.component';
 
 export class PollutantItem {
     @Input() data: any;
+    popover: any;
+
     constructor(public popoverController: PopoverController) {
 
     }
     async presentPopover(ev: any) {
-      const popover = await this.popoverController.create({
+      this.popover = await this.popoverController.create({
         component: Popover,
         cssClass: 'module-popover2',
         event: ev,
+        componentProps: {data: "hello"},
         translucent: false
       });
-      popover.style.cssText = '--min-width: 90%; --max-width: 100%; --min-height: 90%; --max-height: 100%;';
-      return await popover.present();
+      this.popover.style.cssText = '--min-width: 90%; --max-width: 100%; --min-height: 90%; --max-height: 100%;';
+      return await this.popover.present();
     }
 }
