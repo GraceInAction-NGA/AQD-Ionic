@@ -1,10 +1,21 @@
 .pollutantItemContainer {
     padding:0.5em;
     margin-bottom: 1em;
-    background: #9BC69F;
     color: #555555;
     height: 82px;
     list-style: none;
     display: flex;
     justify-content: space-between;
+}
+.green {
+    background: #9BC69F;
+}
+.yellow {
+    background: #F6DB7A;
+}
+.orange {
+    background: #F5935B;
+}
+.red {
+    background: #DC6E4C;
 }

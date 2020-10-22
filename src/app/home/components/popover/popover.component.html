@@ -1,6 +1,6 @@
 <div class="popover_title_wrapper"  [class] = "className" >
-  <p class="popover_title"> PM2.5 Fine Particles </p>
-  <button (click)="this.dismiss()">
+  <p class="popover_title"> {{data.label}} <span class="label_description">{{data.description}}</span> </p>
+  <button class="exit_button" (click)="this.dismiss()">
     <img src="../../../../assets/img/dismissalX.png"/>
   </button>
 </div>
@@ -8,14 +8,14 @@
 <ion-slides pager="true" [options]="slideOpts">
     <ion-slide>
         <div class="slide-wrapper">
-                <h1>Slide 1</h1>
+                <h1>{{pollutantInfo[0].title}}</h1>
                 <p>Hello there I am not your father</p>
 
         </div>
     </ion-slide>
     <ion-slide>
         <div>
-      <h1>Slide 2</h1>
+      <h1>{{pollutantInfo[1].title}}</h1>
       <p>Hello there I am not your father</p>
       <p>Hello there I am not your father</p>
 
@@ -31,9 +31,23 @@
     </ion-slide>
     <ion-slide>
             <div>
-                    <h1>Slide 1</h1>
+                    <h1>{{pollutantInfo[2].title}}</h1>
                     <p>Hello there I am not your father</p>
     
             </div>
     </ion-slide>
+    <ion-slide>
+      <div>
+              <h1>{{pollutantInfo[3].title}}</h1>
+              <p>Hello there I am your father</p>
+
+      </div>
+</ion-slide>
+<ion-slide>
+  <div>
+          <h1>{{pollutantInfo[4].title}}</h1>
+          <p>Hello there I am not your father</p>
+
+  </div>
+</ion-slide>
   </ion-slides>

@@ -13,6 +13,7 @@ import { PollutantItem } from '../pollutantItem/pollutantItem.component';
 export class PollutantList {
     PM25 = {
       label:"PM2.5",
+      description: "Small Particles",
       value:9,
       level:"Very Unhealthy",
       status: "Hazardous",
@@ -20,6 +21,7 @@ export class PollutantList {
     };
     PM10 = {
       label:"PM10",
+      description: "Respirable Suspended Particle",
       value:43,
       level:"Unhealthy",
       status: "Unhealthy for living",
@@ -27,13 +29,15 @@ export class PollutantList {
     };
     O3 = {
       label:"O3",
+      description: "Ozone",
       value:9,
       level:"Good",
       status: "Pretty Good",
       unit: "ug/m^3"
     };
     NO2 = {
-      label:"NO3",
+      label:"NO2",
+      description: "Nitrogen Dioxide",
       value:9,
       level:"Moderate",
       status: "Goodish",

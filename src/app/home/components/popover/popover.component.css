@@ -29,11 +29,16 @@
 
 .popover_title {
     text-align: left;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 0rem;
     margin-top: 0rem;
 }
-
+.label_description {
+    font-size: 1rem;
+}
+.exit_button {
+    padding:0;
+}
 #popover_text {
     padding-left: 1rem;
     padding-right: 1rem;
