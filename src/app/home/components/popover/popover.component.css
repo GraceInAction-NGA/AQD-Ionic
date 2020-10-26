@@ -54,3 +54,14 @@
     flex-direction: column;
     height: 100%;
 }
+.popover-header {
+    color: #599AA3;
+    text-align: left;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.popover-text {
+    text-align: left;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
