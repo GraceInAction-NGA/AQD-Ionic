@@ -53,6 +53,8 @@
     justify-items: center;
     flex-direction: column;
     height: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 .popover-header {
     color: #599AA3;
@@ -62,6 +64,31 @@
 }
 .popover-text {
     text-align: left;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    font-size: 0.7em;
+    margin: 0;
+    color: #555555;
+}
+.second-popover-header {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75em;
+    margin-bottom: 0;
+    color: #555555;
+}
+ion-row{
+    padding-top: 1rem;
+}
+.icon{
+    width: 4rem;
+    text-align: left;
+    padding: 0;
+}
+ion-grid{
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;   
+}
+.highlighted {
+    font-weight: 700;
+    background-color: #F6DB7A;
 }

@@ -12,6 +12,10 @@ export class Popover {
   @Input() data;
   @Input() popover;
   className: string = 'popover_title_wrapper';
+  col1: string = "slide-wrapper";
+  col2: string = "slide-wrapper";
+  col3: string = "slide-wrapper";
+  col4: string = "slide-wrapper";
   pollutantInfo: any;
   constructor() { 
 
@@ -19,9 +23,29 @@ export class Popover {
   ngOnInit(){
     this.setColor();
     this.setPollutantInfo();
+    this.setHighlight();
   }
   dismiss() {
     this.popover.dismiss();
+  }
+  setHighlight(){
+  switch(this.data.level){
+      case "Very Unhealthy":
+        this.col4 += " highlighted";
+        break;
+      case "Unhealthy":
+        this.col3 += " highlighted";
+        break;
+      case "Moderate":
+        this.col2 += " highlighted";
+        break;
+      case "Good":
+        this.col1 += " highlighted";
+        break;
+      default:
+        console.log("invalid level");
+        break;
+    }
   }
   setColor(){
     switch(this.data.level){
