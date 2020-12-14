@@ -75,6 +75,7 @@
     font-size: 0.75em;
     margin-bottom: 0;
     color: #555555;
+    visibility: visible;
 }
 ion-row{
     padding-top: 1rem;
@@ -90,6 +91,7 @@ ion-grid{
     padding-right: 0;   
 }
 .highlighted {
-    font-weight: 700;
+    font-weight: bolder;
     background-color: #F6DB7A;
+    visibility: visible;
 }

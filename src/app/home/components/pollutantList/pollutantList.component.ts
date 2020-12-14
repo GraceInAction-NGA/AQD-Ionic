@@ -3,7 +3,6 @@ import { Platform } from '@ionic/angular';
 import axios from "axios";
 import { PollutantItem } from '../pollutantItem/pollutantItem.component';
 
-
 @Component({  
   selector: 'PollutantList',
   templateUrl: 'PollutantList.component.html',
@@ -17,7 +16,7 @@ export class PollutantList {
       value:9,
       level:"Very Unhealthy",
       status: "Hazardous",
-      unit: "ug/m^3"
+      unit: "µg/m"
     };
     PM10 = {
       label:"PM10",
@@ -25,7 +24,7 @@ export class PollutantList {
       value:43,
       level:"Unhealthy",
       status: "Unhealthy for living",
-      unit: "ug/m^3"
+      unit: "µg/m"
     };
     O3 = {
       label:"O3",
@@ -33,7 +32,7 @@ export class PollutantList {
       value:9,
       level:"Good",
       status: "Pretty Good",
-      unit: "ug/m^3"
+      unit: "µg/m"
     };
     NO2 = {
       label:"NO2",
@@ -41,7 +40,7 @@ export class PollutantList {
       value:9,
       level:"Moderate",
       status: "Goodish",
-      unit: "ug/m^3"
+      unit: "µg/m"
     };
     constructor(){
         

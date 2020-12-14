@@ -116,8 +116,37 @@
 <ion-slide>
   <div class="slide-wrapper">
           <h1 class="popover-header">{{pollutantInfo[4].title}}</h1>
-          <p class="popover-text">Hello there I am not your father</p>
-
+          
+          
+          <ion-list> 
+            <ion-item *ngFor="#item of items" ></ion-item> {{ item }} </ion-item> 
+          </ion-list>
+          
+          <ul class="references-list">
+            <li><a>
+              i.com</a>
+            </li>
+            <li>  
+              <a>
+                am.com
+              </a>
+            </li>
+            <li>
+              <a>
+                not.com
+              </a>
+            </li>
+            <li>  
+              <a>
+                your.com
+              </a> 
+            </li>
+            <li>  
+              <a>
+                father.com<img src="..\..\..\..\assets\icon\openInNewTab.svg">
+              </a> 
+            </li>
+          </ul>
   </div>
 </ion-slide>
   </ion-slides>

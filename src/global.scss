@@ -17,3 +17,13 @@
 ion-content{
 	font-size:20px;
 }
+.ion-padding{
+  padding-left: 10px;
+  padding-right: 10px;
+  --padding-start: var(--ion-padding, 10px);
+  --padding-end: var(--ion-padding, 10px);
+}
+ion-card {
+  margin-left: 0;
+  margin-right: 0;
+}

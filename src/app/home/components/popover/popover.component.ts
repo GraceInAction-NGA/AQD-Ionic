@@ -16,6 +16,7 @@ export class Popover {
   col2: string = "slide-wrapper";
   col3: string = "slide-wrapper";
   col4: string = "slide-wrapper";
+  items : any = [1,2,3,4,2,4,2,6,89,6,7654,43,3456,76,543];
   pollutantInfo: any;
   constructor() { 
 
@@ -84,6 +85,7 @@ export class Popover {
         console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAH');
     }
   }
+  
   PM25Info: any = [{
     title:"What Is PM2.5?",
   },{
