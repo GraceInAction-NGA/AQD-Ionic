@@ -1,152 +1,157 @@
-<div class="popover_title_wrapper"  [class] = "className" >
+<div class="popover_title_wrapper" [class]="className">
   <p class="popover_title"> {{data.label}} <span class="label_description">{{data.description}}</span> </p>
   <button class="exit_button" (click)="this.dismiss()">
-    <img src="../../../../assets/img/dismissalX.png"/>
+    <img src="../../../../assets/img/dismissalX.png" />
   </button>
 </div>
 
 <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide>
-        <div class="slide-wrapper">
-                <h1 class="popover-header">{{pollutantInfo[0].title}}</h1>
-              <p class="popover-text">Fine particulate matter (PM2.5) is an air pollutant that is a concern for people's health levels  in air are high. PM2.5 are  tiny particles in the air that reduce visibility and cause the air to appear hazy when levels are elevated.
-                Fine particulate matter (PM2.5) is an air pollutant that is a concern for people's health when levels in air are high. PM2.5 are tiny particles in the air that reduce visibility and cause the air to appear hazy when levels are elevated.
-              </p>
+  <ion-slide>
+    <div class="slide-wrapper">
+      <h1 class="popover-header">{{pollutantInfo[0].title}}</h1>
+      <p class="popover-text">Fine particulate matter (PM2.5) is an air pollutant that is a concern for people's health
+        levels in air are high. PM2.5 are tiny particles in the air that reduce visibility and cause the air to appear
+        hazy when levels are elevated.
+        Fine particulate matter (PM2.5) is an air pollutant that is a concern for people's health when levels in air are
+        high. PM2.5 are tiny particles in the air that reduce visibility and cause the air to appear hazy when levels
+        are elevated.
+      </p>
 
-        </div>
-    </ion-slide>
-    <ion-slide>
-<div class="slide-wrapper">
-      <h1 class="popover-header">{{pollutantInfo[1].title}}</h1>
-      
-  <p class="popover-text">souvbwee ewwuewboiu b psibdkas jgfweoyia ksdubf fcbvmeiavb for info on ion-grid: https://ionicframework.com/docs/api/grid</p>
-  <ion-grid>
-    <ion-row >
-      <ion-col size="4">    
-        <img class="icon" src="../../../../assets/icon/lungs.png">
-      </ion-col>
-      <ion-col size="8">
-        <p class="second-popover-header">blah blah blah</p>
-        <p class="popover-text">small blah blah blah</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="4">
-        <p>*icon*</p>
-      </ion-col>
-      <ion-col size="8">
-        <p class="second-popover-header">blah blah blah</p>
-        <p class="popover-text">small blah blah blah</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="4">
-        <p>*icon*</p>
-      </ion-col>
-      <ion-col size="8">
-        <p class="second-popover-header">blah blah blah</p>
-        <p class="popover-text">small blah blah blah</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
     </div>
-      
-    </ion-slide>
-    <ion-slide>
-            <div class="slide-wrapper">
-                    <h1 class="popover-header">{{pollutantInfo[2].title}}</h1>
-                    <p class="popover-text">Hello there I am not your father</p>
-                    <ion-grid>
-                      <ion-row >
-                        <ion-col size="4">    
-                          <img class="icon" src="../../../../assets/icon/lungs.png">
-                        </ion-col>
-                        <ion-col size="8">
-                          <p class="second-popover-header">blah blah blah</p>
-                          <p class="popover-text">small blah blah blah</p>
-                        </ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="4">
-                          <p>*icon*</p>
-                        </ion-col>
-                        <ion-col size="8">
-                          <p class="second-popover-header">blah blah blah</p>
-                          <p class="popover-text">small blah blah blah</p>
-                        </ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="4">
-                          <p>*icon*</p>
-                        </ion-col>
-                        <ion-col size="8">
-                          <p class="second-popover-header">blah blah blah</p>
-                          <p class="popover-text">small blah blah blah</p>
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
-            </div>
-    </ion-slide>
-    <ion-slide>
-      <div>
-              <h1 class="popover-header">{{pollutantInfo[3].title}}</h1>
-              <ion-grid>
-                <ion-row>
-                  <ion-col [class]="col1" size="12">
-                    <p class="second-popover-header">blah blah blah</p>
-                    <p class="popover-text">small blah blah blah</p>
-                  </ion-col>
-                  <ion-col [class]="col2" size="12">
-                    <p class="second-popover-header">blah blah blah</p>
-                    <p class="popover-text">small blah blah blah</p>  
-                  </ion-col>
-                  <ion-col [class]="col3" size="12">
-                    <p class="second-popover-header">blah blah blah</p>
-                    <p class="popover-text">small blah blah blah</p>
-                  </ion-col>
-                  <ion-col [class]="col4" size="12">
-                    <p class="second-popover-header">blah blah blah</p>
-                    <p class="popover-text">small blah blah blah</p>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+  </ion-slide>
+  <ion-slide>
+    <div class="slide-wrapper">
+      <h1 class="popover-header">{{pollutantInfo[1].title}}</h1>
 
-      </div>
-</ion-slide>
-<ion-slide>
-  <div class="slide-wrapper">
-          <h1 class="popover-header">{{pollutantInfo[4].title}}</h1>
-          
-          
-          <ion-list> 
-           <ion-item *ngFor="let item of items" >{{ item }} </ion-item>
-          </ion-list>
-          
-          <ul class="references-list">
-            <li><a>
-              i.com</a>
-            </li>
-            <li>  
-              <a>
-                am.com
-              </a>
-            </li>
-            <li>
-              <a>
-                not.com
-              </a>
-            </li>
-            <li>  
-              <a>
-                your.com
-              </a> 
-            </li>
-            <li>  
-              <a>
-                father.com<img src="..\..\..\..\assets\icon\openInNewTab.svg">
-              </a> 
-            </li>
-          </ul>
-  </div>
-</ion-slide>
-  </ion-slides>
+      <p class="popover-text">souvbwee ewwuewboiu b psibdkas jgfweoyia ksdubf fcbvmeiavb for info on ion-grid:
+        https://ionicframework.com/docs/api/grid</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <img class="icon" src="../../../../assets/icon/lungs.png">
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <p>*icon*</p>
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <p>*icon*</p>
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </ion-slide>
+  <ion-slide>
+    <div class="slide-wrapper">
+      <h1 class="popover-header">{{pollutantInfo[2].title}}</h1>
+      <p class="popover-text">Hello there I am not your father</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <img class="icon" src="../../../../assets/icon/lungs.png">
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <p>*icon*</p>
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <p>*icon*</p>
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-slide>
+  <ion-slide>
+    <div>
+      <h1 class="popover-header">{{pollutantInfo[3].title}}</h1>
+      <ion-grid>
+        <ion-row>
+          <ion-col [class]="col1" size="12">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+          <ion-col [class]="col2" size="12">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+          <ion-col [class]="col3" size="12">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+          <ion-col [class]="col4" size="12">
+            <p class="second-popover-header">blah blah blah</p>
+            <p class="popover-text">small blah blah blah</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+  </ion-slide>
+  <ion-slide>
+    <div class="slide-wrapper">
+      <h1 class="popover-header">{{pollutantInfo[4].title}}</h1>
+
+
+      <ion-list>
+        <ion-item *ngFor="let item of items">{{ item }} </ion-item>
+      </ion-list>
+
+      <ul class="references-list">
+        <li><a>
+            i.com</a>
+        </li>
+        <li>
+          <a>
+            am.com
+          </a>
+        </li>
+        <li>
+          <a>
+            not.com
+          </a>
+        </li>
+        <li>
+          <a>
+            your.com
+          </a>
+        </li>
+        <li>
+          <a>
+            father.com<img src="..\..\..\..\assets\icon\openInNewTab.svg">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ion-slide>
+</ion-slides>
