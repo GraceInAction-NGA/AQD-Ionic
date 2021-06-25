@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="gradient-bg home ion-padding">
-  <Gauge (outputStatement)="statement = $event"></Gauge>
+  <Gauge (outputStatement)="getStatement($event)"></Gauge>
 
   <p class="center-text" id="statement">{{statement}}</p>
 

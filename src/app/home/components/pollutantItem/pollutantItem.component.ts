@@ -1,6 +1,4 @@
-import { Component, ViewChild, ElementRef, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import axios from "axios";
+import { Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { Popover } from '../popover/popover.component';
 
@@ -11,26 +9,31 @@ import { Popover } from '../popover/popover.component';
 })
 
 export class PollutantItem {
+
     @Input() data: any;
     popover: any;
     className:string;
-    constructor(public popoverController: PopoverController) {
+
+    constructor (public popoverController: PopoverController) {
       this.className = "pollutantItemContainer";
     }
-    async presentPopover(ev: any) {
+
+    async presentPopover() {
       this.popover = await this.popoverController.create({
         component: Popover,
         cssClass: 'module-popover2',
-        event: ev,
         componentProps: {data: this.data},
         translucent: false
       });
+
       this.popover.style.cssText = '--min-width: 90%; --max-width: 100%; --min-height: 90%; --max-height: 100%;';
       return await this.popover.present();
     }
+
     ngOnInit(){
       this.setColor();
     }
+
     setColor(){
       switch(this.data.level){
         case "Very Unhealthy":

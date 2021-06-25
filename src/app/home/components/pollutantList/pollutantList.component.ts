@@ -1,6 +1,4 @@
-import { Component, ViewChild, ElementRef, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import axios from "axios";
+import { Component } from '@angular/core';
 import { PollutantItem } from '../pollutantItem/pollutantItem.component';
 
 @Component({  
@@ -42,7 +40,7 @@ export class PollutantList {
       status: "Goodish",
       unit: "µg/m"
     };
-    constructor(){
-        
-    }
+
+    constructor(){ }
+
 }

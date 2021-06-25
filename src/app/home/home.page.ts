@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 
 export class HomePage {
-  constructor() {
-  };
+  constructor() { };
+
+  statement: any;
+
+  getStatement(message: string) {
+    this.statement = message;
+  }
 }

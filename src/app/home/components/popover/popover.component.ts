@@ -1,6 +1,4 @@
-import { Component, ViewChild, ElementRef, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import axios from "axios";
+import { Component, Input } from '@angular/core';
 
 @Component({  
   selector: 'Popover',

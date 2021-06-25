@@ -1,4 +1,3 @@
-import 'core-js/es7/reflect';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';  
 import {Chart} from "chart.js";
 import axios from "axios";
