@@ -9,12 +9,8 @@
   <ion-slide>
     <div class="slide-wrapper">
       <h1 class="popover-header">{{pollutantInfo[0].title}}</h1>
-      <p class="popover-text">Fine particulate matter (PM2.5) is an air pollutant that is a concern for people's health
-        levels in air are high. PM2.5 are tiny particles in the air that reduce visibility and cause the air to appear
-        hazy when levels are elevated.
-        Fine particulate matter (PM2.5) is an air pollutant that is a concern for people's health when levels in air are
-        high. PM2.5 are tiny particles in the air that reduce visibility and cause the air to appear hazy when levels
-        are elevated.
+      <p class="popover-text"> {{pollutantInfo[0].text}}
+
       </p>
 
     </div>
@@ -23,34 +19,47 @@
     <div class="slide-wrapper">
       <h1 class="popover-header">{{pollutantInfo[1].title}}</h1>
 
-      <p class="popover-text">souvbwee ewwuewboiu b psibdkas jgfweoyia ksdubf fcbvmeiavb for info on ion-grid:
-        https://ionicframework.com/docs/api/grid</p>
+      <p class="popover-text">{{pollutantInfo[1].text}}
+    </p>
       <ion-grid>
         <ion-row>
-          <ion-col size="4">
-            <img class="icon" src="../../../../assets/icon/lungs.png">
-          </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">blah blah blah</p>
-            <p class="popover-text">small blah blah blah</p>
+            <p class="second-popover-header">{{pollutantInfo[1].list[0]}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="4">
-            <p>*icon*</p>
-          </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">blah blah blah</p>
-            <p class="popover-text">small blah blah blah</p>
+            <p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="4">
-            <p>*icon*</p>
-          </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">blah blah blah</p>
-            <p class="popover-text">small blah blah blah</p>
+            <p class="second-popover-header">{{pollutantInfo[1].list[2]}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="8">
+            <p class="second-popover-header">{{pollutantInfo[1].list[3]}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="8">
+            <p class="second-popover-header">{{pollutantInfo[1].list[4]}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="8">
+            <p class="second-popover-header">{{pollutantInfo[1].list[5]}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="8">
+            <p class="second-popover-header">{{pollutantInfo[1].list[6]}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="8">
+            <p class="second-popover-header">{{pollutantInfo[1].list[7]}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -60,33 +69,37 @@
   <ion-slide>
     <div class="slide-wrapper">
       <h1 class="popover-header">{{pollutantInfo[2].title}}</h1>
-      <p class="popover-text">Hello there I am not your father</p>
-      <ion-grid>
+     <ion-grid>
         <ion-row>
           <ion-col size="4">
             <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">blah blah blah</p>
-            <p class="popover-text">small blah blah blah</p>
+            <p class="second-popover-header">Dust from roads</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="4">
-            <p>*icon*</p>
+            <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">blah blah blah</p>
-            <p class="popover-text">small blah blah blah</p>
+            <p class="second-popover-header">Industrial Processes</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="4">
-            <p>*icon*</p>
+            <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">blah blah blah</p>
-            <p class="popover-text">small blah blah blah</p>
+            <p class="second-popover-header">Fuel combustion</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+            <img class="icon" src="../../../../assets/icon/lungs.png">
+          </ion-col>
+          <ion-col size="8">
+            <p class="second-popover-header">Power plants</p>
           </ion-col>
         </ion-row>
       </ion-grid>
