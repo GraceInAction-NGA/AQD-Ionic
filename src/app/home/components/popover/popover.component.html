@@ -6,6 +6,33 @@
 </div>
 
 <ion-slides pager="true">
+  <ion-slide> 
+
+    <div class="slide-wrapper"> 
+      <h1 class="popover-header">hi</h1> 
+      <ion-button (click)="showDeepDive()">>press me</ion-button>
+      <p #hiddenContent hidden class="popover-text">{{pollutantInfo[1].textDeepDive}}
+
+   </div> 
+</ion-slide>
+  <ion-slide>
+    <div class="slide-wrapper">
+      <h1 class="popover-header">{{pollutantInfo[1].title}}</h1>
+
+      <p class="popover-text">{{pollutantInfo[1].text}}
+    </p>
+      <ul>
+
+        <li *ngFor="let item of pollutantInfo[1].list"> <p class="second-popover-header">{{item}}</p> </li>
+        <!-- <li><p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p></li> -->
+       
+
+      </ul>
+      <p class="popover-text">{{pollutantInfo[1].textDeepDive}}
+      </p>
+    </div>
+  </ion-slide>
+
   <ion-slide>
     <div class="slide-wrapper">
       <h1 class="popover-header">{{pollutantInfo[0].title}}</h1>
@@ -21,48 +48,14 @@
 
       <p class="popover-text">{{pollutantInfo[1].text}}
     </p>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[0]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[2]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[3]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[4]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[5]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[6]}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="8">
-            <p class="second-popover-header">{{pollutantInfo[1].list[7]}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ul>
+
+        <li *ngFor="let item of pollutantInfo[1].list"> <p class="second-popover-header">{{item}}</p> </li>
+        <!-- <li><p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p></li> -->
+       
+
+      </ul>
+      <p class="popover-text">{{pollutantInfo[1].textDeepDive}}</p>
     </div>
 
   </ion-slide>
@@ -75,7 +68,7 @@
             <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">Dust from roads</p>
+            <p class="second-popover-header">{{pollutantInfo[2].list[0]}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -83,7 +76,7 @@
             <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">Industrial Processes</p>
+            <p class="second-popover-header">{{pollutantInfo[2].list[1]}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -91,7 +84,7 @@
             <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">Fuel combustion</p>
+            <p class="second-popover-header">{{pollutantInfo[2].list[2]}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -99,15 +92,31 @@
             <img class="icon" src="../../../../assets/icon/lungs.png">
           </ion-col>
           <ion-col size="8">
-            <p class="second-popover-header">Power plants</p>
+            <p class="second-popover-header">{{pollutantInfo[2].list[3]}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
   </ion-slide>
   <ion-slide>
-    <div>
+    <div class="slide-wrapper">
       <h1 class="popover-header">{{pollutantInfo[3].title}}</h1>
+
+      <p class="popover-text">{{pollutantInfo[3].text}}
+    </p>
+      <ul>
+
+        <li *ngFor="let item of pollutantInfo[3].list"> <p class="second-popover-header">{{item}}</p> </li>
+        <!-- <li><p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p></li> -->
+       
+
+      </ul>
+    </div>
+
+  </ion-slide>
+  <ion-slide>
+    <div>
+      <h1 class="popover-header">{{pollutantInfo[4].title}}</h1>
       <ion-grid>
         <ion-row>
           <ion-col [class]="col1" size="12">
@@ -133,38 +142,15 @@
   </ion-slide>
   <ion-slide>
     <div class="slide-wrapper">
-      <h1 class="popover-header">{{pollutantInfo[4].title}}</h1>
+      <h1 class="popover-header">{{pollutantInfo[5].title}}</h1>
+      
+        <a href={{pollutantInfo[5].link}} target="_blank">{{pollutantInfo[5].text}}</a>
 
 
-      <ion-list>
-        <ion-item *ngFor="let item of items">{{ item }} </ion-item>
-      </ion-list>
-
-      <ul class="references-list">
-        <li><a>
-            i.com</a>
-        </li>
-        <li>
-          <a>
-            am.com
-          </a>
-        </li>
-        <li>
-          <a>
-            not.com
-          </a>
-        </li>
-        <li>
-          <a>
-            your.com
-          </a>
-        </li>
-        <li>
-          <a>
-            father.com<img src="..\..\..\..\assets\icon\openInNewTab.svg">
-          </a>
-        </li>
-      </ul>
+      <!-- <ion-list> -->
+        <!-- <ion-item *ngFor="let item of items">{{ item }} </ion-item> -->
+      <!-- </ion-list> -->
+      
     </div>
   </ion-slide>
 </ion-slides>
