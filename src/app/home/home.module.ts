@@ -10,6 +10,8 @@ import { Gauge } from './components/gauge/gauge.component';
 import { PollutantList } from './components/pollutantList/pollutantList.component';
 import { PollutantItem } from './components/pollutantItem/pollutantItem.component';
 import { Popover } from './components/popover/popover.component';
+import { HiddenElement } from './components/hiddenElement/hiddenElement.component';
+
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import { Popover } from './components/popover/popover.component';
       }
     ])
   ],
-  declarations: [HomePage, LineChart, Gauge, PollutantList, PollutantItem, Popover],
+  declarations: [HomePage, LineChart, Gauge, PollutantList, PollutantItem, Popover, HiddenElement],
   entryComponents: [Popover],
 })
 export class HomePageModule { }

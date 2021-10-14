@@ -10,8 +10,10 @@ import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 
 export class Popover {
   @Input() data;
-  @ViewChild('hiddenContent', {static: false}) hiddenContent: ElementRef;
   @Input() popover;
+  @ViewChild('hiddenContent', {static: false}) hiddenContent: ElementRef;
+  @ViewChild('hiddenContent1', {static: false}) hiddenContent1: ElementRef;
+
   className: string = 'popover_title_wrapper';
   col1: string = "slide-wrapper";
   col2: string = "slide-wrapper";
@@ -31,9 +33,13 @@ export class Popover {
     this.popover.dismiss();
   }
 
-showDeepDive(){
+showDeepDive(text){
   this.hiddenContent.nativeElement.hidden = false;
-  console.log(this.hiddenContent.nativeElement)
+  console.log(text)
+}
+showDeepDive1(text){
+  this.hiddenContent1.nativeElement.hidden = false;
+  console.log()
 }
 
 
