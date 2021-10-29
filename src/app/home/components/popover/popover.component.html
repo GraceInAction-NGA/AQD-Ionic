@@ -10,33 +10,24 @@
 
     <div class="slide-wrapper"> 
       <h1 class="popover-header">hi</h1> 
-      <ion-button (click)="showDeepDive()">>press me</ion-button>
-      <p #hiddenContent hidden class="popover-text">{{pollutantInfo[1].textDeepDive}}
+      <HiddenElement [hiddenText]="pollutantInfo[0].textDeepDive"></HiddenElement>
+   </div> 
+  </ion-slide>
+  <ion-slide> 
+
+    <div class="slide-wrapper"> 
+      <h1 class="popover-header">hi</h1> 
+        <HiddenElement [hiddenText]= "pollutantInfo[1].textDeepDive"></HiddenElement>
+
 
    </div> 
-</ion-slide>
-  <ion-slide>
-    <div class="slide-wrapper">
-      <h1 class="popover-header">{{pollutantInfo[1].title}}</h1>
-
-      <p class="popover-text">{{pollutantInfo[1].text}}
-    </p>
-      <ul>
-
-        <li *ngFor="let item of pollutantInfo[1].list"> <p class="second-popover-header">{{item}}</p> </li>
-        <!-- <li><p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p></li> -->
-       
-
-      </ul>
-      <p class="popover-text">{{pollutantInfo[1].textDeepDive}}
-      </p>
-    </div>
   </ion-slide>
 
   <ion-slide>
     <div class="slide-wrapper">
       <h1 class="popover-header">{{pollutantInfo[0].title}}</h1>
       <p class="popover-text"> {{pollutantInfo[0].text}}
+        <HiddenElement [hiddenText]= "pollutantInfo[2].textDeepDive"></HiddenElement>
 
       </p>
 
@@ -56,8 +47,27 @@
 
       </ul>
       <p class="popover-text">{{pollutantInfo[1].textDeepDive}}</p>
+
     </div>
 
+  </ion-slide>
+  <ion-slide>
+    <div class="slide-wrapper">
+      <h1 class="popover-header">{{pollutantInfo[1].title}}</h1>
+
+      <p class="popover-text">{{pollutantInfo[1].text}}
+    </p>
+      <ul>
+
+        <li *ngFor="let item of pollutantInfo[1].list"> <p class="second-popover-header">{{item}}</p> </li>
+        <!-- <li><p class="second-popover-header">{{pollutantInfo[1].list[1]}}</p></li> -->
+       
+
+      </ul>
+      <p class="popover-text">{{pollutantInfo[1].textDeepDive}}
+
+      </p>
+    </div>
   </ion-slide>
   <ion-slide>
     <div class="slide-wrapper">
@@ -97,6 +107,7 @@
         </ion-row>
       </ion-grid>
     </div>
+
   </ion-slide>
   <ion-slide>
     <div class="slide-wrapper">
@@ -111,6 +122,7 @@
        
 
       </ul>
+
     </div>
 
   </ion-slide>
