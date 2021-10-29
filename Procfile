@@ -1,1 +1,1 @@
-web: npm run build && node run start
+web: npm run build && export SET NODE_OPTIONS=--openssl-legacy-provider && node server.js
