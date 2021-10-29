@@ -3,8 +3,8 @@ import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({  
   selector: 'HiddenElement',
-  templateUrl: 'HiddenElement.component.html',
-  styleUrls: ['HiddenElement.component.css'],
+  templateUrl: 'hiddenElement.component.html',
+  styleUrls: ['hiddenElement.component.css'],
 })
 
 
