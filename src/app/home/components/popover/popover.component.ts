@@ -3,8 +3,8 @@ import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({  
   selector: 'Popover',
-  templateUrl: 'Popover.component.html',
-  styleUrls: ['Popover.component.css'],
+  templateUrl: 'popover.component.html',
+  styleUrls: ['popover.component.css'],
 })
 
 

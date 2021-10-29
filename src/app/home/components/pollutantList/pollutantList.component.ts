@@ -3,8 +3,8 @@ import { PollutantItem } from '../pollutantItem/pollutantItem.component';
 
 @Component({  
   selector: 'PollutantList',
-  templateUrl: 'PollutantList.component.html',
-  styleUrls: ['PollutantList.component.css'],
+  templateUrl: 'pollutantList.component.html',
+  styleUrls: ['pollutantList.component.css'],
 })
 
 export class PollutantList {
