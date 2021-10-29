@@ -1,1 +1,1 @@
-web: ng build --aot --prod && export SET NODE_OPTIONS=--openssl-legacy-provider && node server.js
+web: node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --aot --prod && export SET NODE_OPTIONS=--openssl-legacy-provider && node server.js
