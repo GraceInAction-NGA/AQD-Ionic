@@ -18,7 +18,7 @@
   },
   "private": true,
   "dependencies": {
-    "@ionic/angular": "^4.x.x",
+    "@ionic/angular": "latest",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "chart.js": "^2.9.4",
@@ -27,14 +27,14 @@
     "tslib": "^2.3.1",
     "@ionic-native/splash-screen": "latest",
     "@ionic-native/status-bar": "latest",
-    "@angular/platform-browser-dynamic": "^8.x.x",
-    "@angular/cli": "^8.x.x",
+    "@angular/platform-browser-dynamic": "latest",
+    "@angular/cli": "latest",
     "morgan": "latest",
     "cors": "latest"
   },
   "heroku-postbuild": "ng build - prod",
   "devDependencies": {
-    "@angular-devkit/build-angular": ">3.x.x",
+    "@angular-devkit/build-angular": "latest",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
