@@ -31,11 +31,10 @@
     "@angular/platform-browser-dynamic": "latest",
     "@angular/cli": "latest",
     "morgan": "latest",
-    "cors": "latest"
+    "cors": "latest",
+    "@angular-devkit/build-angular": "latest"
   },
   "devDependencies": {
-    "@angular/cli": "12.2.12",
-    "@angular-devkit/build-angular": "latest",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
