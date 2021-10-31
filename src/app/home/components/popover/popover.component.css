@@ -95,3 +95,7 @@ ion-grid{
     background-color: #F6DB7A;
     visibility: visible;
 }
+.popover-text{
+    font-size: large;
+    
+}
