@@ -25,31 +25,36 @@ export class LineChart implements OnInit {
 
     async getWeeklyAqis() {
       const {data} = await axios.get(`${this.AQI_BASE_URL}/aqi?limit=10`);
-      console.log(data);
-
       const timestamps = [];
       const today = new Date();
+      today.setHours(0,0,0,0);
+      
       for (let i = 0; i < 10; i++) {
-        const date = today.toDateString();
+        const date = today.toUTCString();
         const timestamp = new Date(date).getTime();
+      
         today.setDate(today.getDate() - 1);
         timestamps.push(timestamp);
       }
 
-      console.log(timestamps);
-
       let j = 0;
       let paddedData = [];
-      for (let i = 0; i < 10; i++) {
-        if (data[j] && timestamps[i] === data[j].timestamp) {
-          paddedData.push(data[j]);
-          j++;
-        } else {
+      for (let i = 0; i < 10; i++) {       
+        if (!data[j]) {
           paddedData.push({aqi: {realTime: 0, twentyfourHours: 0}});
+        } else {
+          const chartDate = new Date(timestamps[i]);
+          const offset = chartDate.getTimezoneOffset() * 60000;
+          const offsetTimestamp = timestamps[i] - offset;
+
+          if (offsetTimestamp === data[j].timestamp) {
+            paddedData.push(data[j]);
+            j++;
+          } else {
+            paddedData.push({aqi: {realTime: 0, twentyfourHours: 0}});
+          }
         }
       }
-
-      console.log(paddedData);
 
       const weekly = paddedData.reduce((acc, {aqi}) => {
         const newAqi = acc.length == 0 ? aqi.realTime : aqi.twentyfourHours;
