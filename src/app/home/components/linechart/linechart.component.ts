@@ -45,8 +45,9 @@ export class LineChart implements OnInit {
         if (!data[j]) {
           paddedData.push({aqi: {realTime: 0, twentyfourHours: 0}});
         } else {
-          const chartDate = new Date(timestamps[i]).toUTCString();
-          const dataDate = new Date(data[j].timestamp).toUTCString();
+          const chartDate = new Date(timestamps[i]).toDateString();
+          const dataDate = new Date(data[j].timestamp).toDateString();
+
           if (chartDate === dataDate) {
             paddedData.push(data[j]);
             j++;
