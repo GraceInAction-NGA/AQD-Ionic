@@ -10,7 +10,7 @@ import axios from "axios";
 
 export class LineChart implements OnInit {
     private TODAY: Date;
-    AQI_BASE_URL = "https://airqualid.herokuapp.com";
+    AQI_BASE_URL = "https://airqualid.herokuapp.com";  
 
     @ViewChild('lineChart', {static: false})
     lineChart: ElementRef;
@@ -28,6 +28,8 @@ export class LineChart implements OnInit {
       const timestamps = [];
       const today = new Date();
       today.setHours(0,0,0,0);
+
+      console.log(data);
       
       for (let i = 0; i < 10; i++) {
         const date = today.toUTCString();
@@ -43,11 +45,9 @@ export class LineChart implements OnInit {
         if (!data[j]) {
           paddedData.push({aqi: {realTime: 0, twentyfourHours: 0}});
         } else {
-          const chartDate = new Date(timestamps[i]);
-          const offset = chartDate.getTimezoneOffset() * 60000;
-          const offsetTimestamp = timestamps[i] - offset;
-
-          if (offsetTimestamp === data[j].timestamp) {
+          const chartDate = new Date(timestamps[i]).toUTCString();
+          const dataDate = new Date(data[j].timestamp).toUTCString();
+          if (chartDate === dataDate) {
             paddedData.push(data[j]);
             j++;
           } else {
